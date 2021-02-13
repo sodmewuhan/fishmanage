@@ -90,4 +90,6 @@ dependencies {
     // 其他
     implementation 'com.alibaba:fastjson:1.2.55'
     implementation 'net.danlew:android.joda:2.10.3'
+    implementation 'org.apache.commons:commons-lang3:3.8.1'
+    implementation 'com.github.GrenderG:Toasty:1.1.2'
 }

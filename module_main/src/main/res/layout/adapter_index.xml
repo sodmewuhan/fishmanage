@@ -176,11 +176,13 @@
         app:ih_title="设备控制"
         app:layout_constraintTop_toBottomOf="@id/line2" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_local"
+    <ListView
+        android:id="@+id/collect_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ih_contorol"
         android:nestedScrollingEnabled="false"
-        app:layout_constraintTop_toBottomOf="@id/ih_contorol" />
+        />
+
 
 </LinearLayout>

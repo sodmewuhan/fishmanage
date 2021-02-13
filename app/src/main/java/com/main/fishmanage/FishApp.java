@@ -26,8 +26,7 @@ public class FishApp extends MultiDexApplication {
 
         ArrayList<Interceptor> interceptorList = new ArrayList();
         interceptorList.add(new LoggingInterceptor());
-//        interceptorList.add(new BearerTokenInterceptor());
-        
+
         Latte.init(this)
                 .withApiHost(ServerURL.BASE_URL)
                 .withIcon(new FontAwesomeModule())

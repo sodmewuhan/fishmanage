@@ -46,4 +46,33 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+
+    <style name="me_common_item_relativeLayout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@drawable/list_view_item_click</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingLeft">0dp</item>
+    </style>
+
+    <style name="me_common_item_title_textView_style" parent="base_textView_style">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textSize">@dimen/textSize_14</item>
+        <item name="android:textColor">@color/textColor_32</item>
+    </style>
+
+    <style name="more_common_item_textView_style" parent="me_common_item_title_textView_style">
+        <item name="android:textSize">@dimen/textSize_12</item>
+    </style>
+
+    <style name="more_common_checkBox_style">
+        <item name="android:layout_width">47dp</item>
+        <item name="android:layout_height">23dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">@drawable/btn_switch</item>
+    </style>
 </resources>

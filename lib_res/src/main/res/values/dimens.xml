@@ -44,4 +44,28 @@
 
     <dimen name="login_titleBar_login_size">@dimen/textSize_20</dimen>
     <dimen name="register_content_layout_marginTop">20dp</dimen>
+
+    <!--good item视图-->
+    <dimen name="good_ll_marginLR">5dp</dimen>
+    <dimen name="good_ll_marginTB">5dp</dimen>
+    <dimen name="good_image_width">98.0dip</dimen>
+    <dimen name="good_image_height">98.0dip</dimen>
+    <dimen name="good_appointment_img_marginLeft">1.8999939dip</dimen>
+    <dimen name="good_appointment_img_marginTop">1.8999939dip</dimen>
+    <dimen name="good_ll_ll_marginLeft">6dp</dimen>
+    <dimen name="good_title_marginRight">6dp</dimen>
+    <dimen name="good_title_size">16.0sp</dimen>
+    <dimen name="good_fresh_order_marginRight">3dp</dimen>
+    <dimen name="good_fresh_order_padding">2dp</dimen>
+    <dimen name="good_des_layout_marginRight">6dp</dimen>
+    <dimen name="good_ratingBar_marginTop">5dp</dimen>
+    <dimen name="good_ratingBar_marginBottom">5dp</dimen>
+    <dimen name="good_ratingBar_maxHeight">11dp</dimen>
+    <dimen name="good_price_marginLeft">3dp</dimen>
+    <dimen name="good_count_marginRight">7dp</dimen>
+    <dimen name="good_area_marginRight">7dp</dimen>
+    <dimen name="good_ratingBar_minHeight">11dp</dimen>
+    <dimen name="head_page_paddingTB">10dp</dimen>
+
+    <dimen name="me_item_common_layout_marginTop">10dp</dimen>
 </resources>

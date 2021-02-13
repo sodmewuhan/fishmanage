@@ -53,11 +53,13 @@ public class IndexDelegate extends BottomItemDelegate {
     @BindView(R2.id.view_pager)
     ViewPager viewPager;
 
-    private List<String> titles = new ArrayList<>();
+//    private List<String> titles = new ArrayList<>();
 
     private ViewPageAdapter titleAdapter;
 
     private CommonNavigator mCommonNavigator;
+
+    private List<FishPondDto> fishPondDtos;
 
     @Override
     public Object setLayout() {
@@ -114,11 +116,7 @@ public class IndexDelegate extends BottomItemDelegate {
                     if ("SUCCESS".equals(result.getMessage())) {
                         LatteLogger.d("from net read rows is " + result.getData().size());
                         if (result.getData() != null && result.getData().size() > 0) {
-                            List<FishPondDto> fishPondDtos = result.getData();
-                            titles = new ArrayList<>();
-                            for(FishPondDto dto : fishPondDtos) {
-                                titles.add(dto.getFishPond().getPondName());
-                            }
+                            fishPondDtos = result.getData();
 
                             initTiltle();
                         } else {
@@ -135,7 +133,7 @@ public class IndexDelegate extends BottomItemDelegate {
     }
 
     private void initTiltle() {
-        titleAdapter = new ViewPageAdapter(titles, getParentDelegate());
+        titleAdapter = new ViewPageAdapter(fishPondDtos, getParentDelegate());
         viewPager.setAdapter(titleAdapter);
         magicIndicator.setBackgroundColor(Color.WHITE);
         mCommonNavigator = new CommonNavigator(getContext());
@@ -146,20 +144,23 @@ public class IndexDelegate extends BottomItemDelegate {
 
             @Override
             public int getCount() {
-                return titles.size();
+                return fishPondDtos.size();
             }
 
             @Override
             public IPagerTitleView getTitleView(Context context, final int index) {
                 SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
-                simplePagerTitleView.setText(titles.get(index));
+                simplePagerTitleView.setText(fishPondDtos.get(index).getFishPond().getPondName());
                 simplePagerTitleView.setNormalColor(Color.parseColor("#333333"));
                 simplePagerTitleView.setSelectedColor(Color.parseColor("#e94220"));
                 simplePagerTitleView.setTextSize(16f);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        LatteLogger.d("名字:" + fishPondDtos.get(index).getFishPond().getPondName() + "index is " + index);
                         viewPager.setCurrentItem(index);
+
+                        titleAdapter.notifyDataSetChanged();
                     }
                 });
                 return simplePagerTitleView;

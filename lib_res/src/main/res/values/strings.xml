@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">library-res</string>
+
+    <string name="Device_ID1">设备1</string>
+    <string name="Device_ID2">设备2</string>
+    <string name="Device_ID3">设备3</string>
+    <string name="Device_ID4">设备4</string>
 </resources>
