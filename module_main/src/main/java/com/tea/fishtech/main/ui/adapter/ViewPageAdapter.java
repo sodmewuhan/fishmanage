@@ -3,6 +3,7 @@ package com.tea.fishtech.main.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,11 +25,13 @@ public class ViewPageAdapter extends PagerAdapter {
 
     private ItemHeader itemHeader;
 
+    private ListView listView ;
+
     private List<String> mDataList = new ArrayList<>();
 
     private List<FishPondDto> fishPondDtoList;
 
-    private List<BoxAndWaterStatusDTO> waterStatusDTOList = new ArrayList<>();
+//    private List<BoxAndWaterStatusDTO> waterStatusDTOList = new ArrayList<>();
 
     private final LatteDelegate DELEGATE;
 
@@ -40,9 +43,9 @@ public class ViewPageAdapter extends PagerAdapter {
         if (fishPondDtoList != null && fishPondDtoList.size() > 0) {
             for (FishPondDto dto : fishPondDtoList) {
                 mDataList.add(dto.getFishPond().getPondName());
-                if (dto.getBoxAndWaterStatusDTOList() != null && dto.getBoxAndWaterStatusDTOList().size() > 0) {
-                    waterStatusDTOList.addAll(dto.getBoxAndWaterStatusDTOList());
-                }
+//                if (dto.getBoxAndWaterStatusDTOList() != null && dto.getBoxAndWaterStatusDTOList().size() > 0) {
+//                    waterStatusDTOList.addAll(dto.getBoxAndWaterStatusDTOList());
+//                }
             }
         }
         DELEGATE = delegate;
@@ -82,6 +85,11 @@ public class ViewPageAdapter extends PagerAdapter {
 
         this.position = position;
         // 设置控制器
+        listView = mView.findViewById(R.id.collect_listView);
+        DeviceAdapter deviceAdapter = new DeviceAdapter(container.getContext(),
+                fishPondDtoList.get(position).getBoxAndWaterStatusDTOList());
+        listView.setAdapter(deviceAdapter);
+
         return mView;
     }
 
@@ -91,4 +99,11 @@ public class ViewPageAdapter extends PagerAdapter {
     }
 
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

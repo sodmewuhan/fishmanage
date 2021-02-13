@@ -38,7 +38,6 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTit
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.WrapPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -159,7 +158,7 @@ public class IndexDelegate extends BottomItemDelegate {
                     public void onClick(View v) {
                         LatteLogger.d("名字:" + fishPondDtos.get(index).getFishPond().getPondName() + "index is " + index);
                         viewPager.setCurrentItem(index);
-
+                        titleAdapter.setPosition(index);
                         titleAdapter.notifyDataSetChanged();
                     }
                 });
