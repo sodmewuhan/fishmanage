@@ -1,0 +1,2 @@
+include ':app', ':module_person', 'library' ,':module_main', ':lib_common', ':lib_res', ':lib_ui'
+rootProject.name='fishmanage'
