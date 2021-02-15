@@ -1,5 +1,7 @@
 package com.tea.fishtech.common.model;
 
+import java.util.List;
+
 public class BoxInfo {
 
     private Integer id;
@@ -19,6 +21,9 @@ public class BoxInfo {
     private String boxTypeName;
 
     private Long fishPondId;
+
+    // 端口状态
+    private List<BoxStatus> statusList;
 
     public Integer getId() {
         return id;
@@ -91,4 +96,14 @@ public class BoxInfo {
     public void setFishPondId(Long fishPondId) {
         this.fishPondId = fishPondId;
     }
+
+    public List<BoxStatus> getStatusList() {
+        return statusList;
+    }
+
+    public void setStatusList(List<BoxStatus> statusList) {
+        this.statusList = statusList;
+    }
+
+
 }

@@ -92,4 +92,6 @@ dependencies {
     implementation 'net.danlew:android.joda:2.10.3'
     implementation 'org.apache.commons:commons-lang3:3.8.1'
     implementation 'com.github.GrenderG:Toasty:1.1.2'
+    implementation 'com.google.guava:guava:23.5-android'
+    implementation 'org.apache.commons:commons-collections4:4.1'
 }

@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.tea.fishtech.common.constants.ServerURL;
 import com.tea.fishtech.common.model.BoxAndWaterStatusDTO;
+import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.common.model.BoxStatusDTO;
 import com.tea.fishtech.common.model.Result;
 import com.tea.fishtech.common.net.RestCreator;
@@ -20,6 +21,7 @@ import com.tea.fishtech.common.ui.Adapter.ViewHolder;
 import com.tea.fishtech.common.utils.log.LatteLogger;
 import com.tea.fishtech.main.R;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 
@@ -33,7 +35,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class DeviceAdapter  extends CommonAdapter<BoxAndWaterStatusDTO> implements View.OnClickListener {
+public class DeviceAdapter  extends CommonAdapter<BoxInfo> implements View.OnClickListener {
 
     public static final String TAG = DeviceAdapter.class.getSimpleName();
 
@@ -51,7 +53,7 @@ public class DeviceAdapter  extends CommonAdapter<BoxAndWaterStatusDTO> implemen
 
     private CheckBox device4;
 
-    public DeviceAdapter(Context context, List<BoxAndWaterStatusDTO> dataList) {
+    public DeviceAdapter(Context context, List<BoxInfo> dataList) {
         super(context, dataList);
     }
 
@@ -68,19 +70,19 @@ public class DeviceAdapter  extends CommonAdapter<BoxAndWaterStatusDTO> implemen
         // 设置准备编号
         TextView deviceId = holder.getView(R.id.deviceinfo);
         StringBuilder deviceIdInfo = new StringBuilder("设备编号:");
-        BoxAndWaterStatusDTO boxAndWaterStatusDTO = getDataList().get(position);
-        deviceIdInfo.append(boxAndWaterStatusDTO.getBoxInfoDTO().getBoxNumber());
+        BoxInfo boxInfo = getDataList().get(position);
+        deviceIdInfo.append(boxInfo.getBoxNumber());
 
-
-        if (boxAndWaterStatusDTO.getBoxOnline() != null) {
-            // 设备在线离线判断
-            String online = boxAndWaterStatusDTO.getBoxOnline().getOnlineStatus();
-            online = StringUtils.isNotEmpty(online) ? online : StringUtils.EMPTY;
-//            deviceIdInfo.append("：");
-            online = online.equals("Y") ? ONLINE : OFFLINE;
-
-//            deviceIdInfo.append(online);
-        }
+        // 在线离线判断
+//        if (boxInfo.getBoxOnline() != null) {
+//            // 设备在线离线判断
+//            String online = boxAndWaterStatusDTO.getBoxOnline().getOnlineStatus();
+//            online = StringUtils.isNotEmpty(online) ? online : StringUtils.EMPTY;
+////            deviceIdInfo.append("：");
+//            online = online.equals("Y") ? ONLINE : OFFLINE;
+//
+////            deviceIdInfo.append(online);
+//        }
 
         deviceId.setText(deviceIdInfo.toString());
 
@@ -91,25 +93,23 @@ public class DeviceAdapter  extends CommonAdapter<BoxAndWaterStatusDTO> implemen
         device3 = holder.getView(R.id.deviceId3);
         device4 = holder.getView(R.id.deviceId4);
 
-        List<BoxStatusDTO> boxStatusDTOS = getDataList().get(position).getBoxStatusDTOS();
-
-        if (boxStatusDTOS != null && boxStatusDTOS.size() > 0) {
-            BoxStatusDTO boxStatusDTO1 = getBoxStatus(boxStatusDTOS,"1");
-            if (boxStatusDTO1 != null) {
-                device1.setChecked("0".equals(boxStatusDTO1.getAction()) ? false : true);
-            }
-            BoxStatusDTO boxStatusDTO2 = getBoxStatus(boxStatusDTOS,"2");
-            if (boxStatusDTO2 != null) {
-                device2.setChecked("0".equals(boxStatusDTO2.getAction()) ? false : true);
-            }
-            BoxStatusDTO boxStatusDTO3 = getBoxStatus(boxStatusDTOS,"3");
-            if (boxStatusDTO3 != null) {
-                device3.setChecked("0".equals(boxStatusDTO3.getAction()) ? false : true);
-            }
-            BoxStatusDTO boxStatusDTO4 = getBoxStatus(boxStatusDTOS,"4");
-            if (boxStatusDTO4 != null) {
-                device4.setChecked("0".equals(boxStatusDTO4.getAction()) ? false : true);
-            }
+        if (CollectionUtils.isNotEmpty(getDataList())) {
+//            BoxStatusDTO boxStatusDTO1 = getBoxStatus(boxStatusDTOS,"1");
+//            if (boxStatusDTO1 != null) {
+//                device1.setChecked("0".equals(boxStatusDTO1.getAction()) ? false : true);
+//            }
+//            BoxStatusDTO boxStatusDTO2 = getBoxStatus(boxStatusDTOS,"2");
+//            if (boxStatusDTO2 != null) {
+//                device2.setChecked("0".equals(boxStatusDTO2.getAction()) ? false : true);
+//            }
+//            BoxStatusDTO boxStatusDTO3 = getBoxStatus(boxStatusDTOS,"3");
+//            if (boxStatusDTO3 != null) {
+//                device3.setChecked("0".equals(boxStatusDTO3.getAction()) ? false : true);
+//            }
+//            BoxStatusDTO boxStatusDTO4 = getBoxStatus(boxStatusDTOS,"4");
+//            if (boxStatusDTO4 != null) {
+//                device4.setChecked("0".equals(boxStatusDTO4.getAction()) ? false : true);
+//            }
         };
         device1.setTag(position);
         device2.setTag(position);
@@ -123,7 +123,7 @@ public class DeviceAdapter  extends CommonAdapter<BoxAndWaterStatusDTO> implemen
 
                 boolean checked = checkBox.isChecked();
                 int position = (int)checkBox.getTag();
-                String boxNumber = getDataList().get(position).getBoxInfoDTO().getBoxNumber();
+                String boxNumber = getDataList().get(position).getBoxNumber();
 //                LatteLogger.d("device1 check status is " + checked + " and tag is " + position);
                 String action  = checked ? "1" : "0";
                 Log.d(TAG,"click deviceId2 and deviceId is " + boxNumber + " and action is " + action);
@@ -138,7 +138,7 @@ public class DeviceAdapter  extends CommonAdapter<BoxAndWaterStatusDTO> implemen
 
                 boolean checked = checkBox.isChecked();
                 int position = (int)checkBox.getTag();
-                String boxNumber = getDataList().get(position).getBoxInfoDTO().getBoxNumber();
+                String boxNumber = getDataList().get(position).getBoxNumber();
                 LatteLogger.d("device2 check status is " + checked + " and tag is " + position);
                 String action  = checked ? "1" : "0";
                 Log.d(TAG,"click deviceId2 and deviceId is " + boxNumber + " and action is " + action);
@@ -153,7 +153,7 @@ public class DeviceAdapter  extends CommonAdapter<BoxAndWaterStatusDTO> implemen
 
                 boolean checked = checkBox.isChecked();
                 int position = (int)checkBox.getTag();
-                String boxNumber = getDataList().get(position).getBoxInfoDTO().getBoxNumber();
+                String boxNumber = getDataList().get(position).getBoxNumber();
                 LatteLogger.d("device3 check status is " + checked + " and tag is " + position);
                 String action  = checked ? "1" : "0";
                 Log.d(TAG,"click deviceId3 and deviceId is " + boxNumber + " and action is " + action);
@@ -168,7 +168,7 @@ public class DeviceAdapter  extends CommonAdapter<BoxAndWaterStatusDTO> implemen
 
                 boolean checked = checkBox.isChecked();
                 int position = (int)checkBox.getTag();
-                String boxNumber = getDataList().get(position).getBoxInfoDTO().getBoxNumber();
+                String boxNumber = getDataList().get(position).getBoxNumber();
                 LatteLogger.d("device4 check status is " + checked + " and tag is " + position);
                 String action  = checked ? "1" : "0";
                 Log.d(TAG,"click deviceId4 and deviceId is " + boxNumber + " and action is " + action);
