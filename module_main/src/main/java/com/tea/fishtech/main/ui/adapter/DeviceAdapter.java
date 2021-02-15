@@ -10,9 +10,10 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.constants.ServerURL;
-import com.tea.fishtech.common.model.BoxAndWaterStatusDTO;
 import com.tea.fishtech.common.model.BoxInfo;
+import com.tea.fishtech.common.model.BoxStatus;
 import com.tea.fishtech.common.model.BoxStatusDTO;
 import com.tea.fishtech.common.model.Result;
 import com.tea.fishtech.common.net.RestCreator;
@@ -94,22 +95,29 @@ public class DeviceAdapter  extends CommonAdapter<BoxInfo> implements View.OnCli
         device4 = holder.getView(R.id.deviceId4);
 
         if (CollectionUtils.isNotEmpty(getDataList())) {
-//            BoxStatusDTO boxStatusDTO1 = getBoxStatus(boxStatusDTOS,"1");
-//            if (boxStatusDTO1 != null) {
-//                device1.setChecked("0".equals(boxStatusDTO1.getAction()) ? false : true);
-//            }
-//            BoxStatusDTO boxStatusDTO2 = getBoxStatus(boxStatusDTOS,"2");
-//            if (boxStatusDTO2 != null) {
-//                device2.setChecked("0".equals(boxStatusDTO2.getAction()) ? false : true);
-//            }
-//            BoxStatusDTO boxStatusDTO3 = getBoxStatus(boxStatusDTOS,"3");
-//            if (boxStatusDTO3 != null) {
-//                device3.setChecked("0".equals(boxStatusDTO3.getAction()) ? false : true);
-//            }
-//            BoxStatusDTO boxStatusDTO4 = getBoxStatus(boxStatusDTOS,"4");
-//            if (boxStatusDTO4 != null) {
-//                device4.setChecked("0".equals(boxStatusDTO4.getAction()) ? false : true);
-//            }
+            for (BoxInfo bi : getDataList()) {
+                if (bi.getBoxTypeId().equals(Constants.BOX_TYPE_CTRL)) {
+                    // 属于控制器
+                    BoxStatus boxStatusDTO1 = getBoxStatus(bi.getStatusList(),"1");
+                    if (boxStatusDTO1 != null) {
+                        device1.setChecked("0".equals(boxStatusDTO1.getAction()) ? false : true);
+                    }
+                    BoxStatus boxStatusDTO2 = getBoxStatus(bi.getStatusList(),"2");
+                    if (boxStatusDTO2 != null) {
+                        device2.setChecked("0".equals(boxStatusDTO2.getAction()) ? false : true);
+                    }
+                    BoxStatus boxStatusDTO3 = getBoxStatus(bi.getStatusList(),"3");
+                    if (boxStatusDTO3 != null) {
+                        device3.setChecked("0".equals(boxStatusDTO3.getAction()) ? false : true);
+                    }
+                    BoxStatus boxStatusDTO4 = getBoxStatus(bi.getStatusList(),"4");
+                    if (boxStatusDTO4 != null) {
+                        device4.setChecked("0".equals(boxStatusDTO4.getAction()) ? false : true);
+                    }
+                }
+
+            }
+
         };
         device1.setTag(position);
         device2.setTag(position);
@@ -178,10 +186,10 @@ public class DeviceAdapter  extends CommonAdapter<BoxInfo> implements View.OnCli
         return holder.getConvertView();
     }
 
-    private BoxStatusDTO getBoxStatus(List<BoxStatusDTO> boxStatusDTOS,String index) {
-        for(BoxStatusDTO boxStatusDTO : boxStatusDTOS) {
-            if (index.equals(boxStatusDTO.getPort())) {
-                return boxStatusDTO;
+    private BoxStatus getBoxStatus(List<BoxStatus> boxStatuses, String index) {
+        for(BoxStatus bs : boxStatuses) {
+            if (index.equals(bs.getPort())) {
+                return bs;
             }
         }
         return null;
