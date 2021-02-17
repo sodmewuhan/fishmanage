@@ -23,6 +23,7 @@ import com.tea.fishtech.main.R;
 import com.tea.fishtech.main.R2;
 import com.tea.fishtech.main.ui.adapter.ViewPageAdapter;
 import com.tea.fishtech.ui.bottom.BottomItemDelegate;
+import com.tea.fishtech.ui.widget.ScrollViewPage;
 import com.zhouyou.http.EasyHttp;
 import com.zhouyou.http.callback.ProgressDialogCallBack;
 import com.zhouyou.http.exception.ApiException;
@@ -50,7 +51,7 @@ public class IndexDelegate extends BottomItemDelegate {
     MagicIndicator magicIndicator;
 
     @BindView(R2.id.view_pager)
-    ViewPager viewPager;
+    ScrollViewPage viewPager;
 
 //    private List<String> titles = new ArrayList<>();
 

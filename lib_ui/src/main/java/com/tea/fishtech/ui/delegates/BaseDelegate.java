@@ -68,9 +68,9 @@ public abstract class BaseDelegate extends Fragment implements ISupportFragment 
         } else {
             throw new ClassCastException("type of setLayout() must be int or View!");
         }
+
         mUnbinder = ButterKnife.bind(this, rootView);
         onBindView(savedInstanceState, rootView);
-
         return rootView;
     }
 

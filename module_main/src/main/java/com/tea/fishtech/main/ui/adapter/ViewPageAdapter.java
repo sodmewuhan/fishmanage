@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.google.common.collect.Lists;
+import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.model.BoxAndWaterStatusDTO;
 import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.common.model.FishPondDto;
@@ -47,9 +49,6 @@ public class ViewPageAdapter extends PagerAdapter {
         if (fishPondDtoList != null && fishPondDtoList.size() > 0) {
             for (FishPondDto dto : fishPondDtoList) {
                 mDataList.add(dto.getFishPond().getPondName());
-//                if (dto.getBoxAndWaterStatusDTOList() != null && dto.getBoxAndWaterStatusDTOList().size() > 0) {
-//                    waterStatusDTOList.addAll(dto.getBoxAndWaterStatusDTOList());
-//                }
             }
         }
         DELEGATE = delegate;
@@ -79,30 +78,55 @@ public class ViewPageAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         LatteLogger.d("instantiateItem fun");
         View mView = LayoutInflater.from(container.getContext()).inflate(R.layout.adapter_index, null);
+
         container.addView(mView);
 
-        // 设置创建时间
-        TextView createTimeTv = mView.findViewById(R.id.createTime);
-        String createTime = SDF.format(fishPondDtoList.get(position).getFishPond().getCreateDate());
-        createTimeTv.setText(createTime);
+        // 控制器和水质探测器分组
+        List<BoxInfo> boxInfos = fishPondDtoList.get(position).getBoxInfoList();
+        List<BoxInfo> controlBox = Lists.newArrayList();
+        List<BoxInfo> waterBox = Lists.newArrayList();
 
-        // 设置水质明细跳转
-        itemHeader = mView.findViewById(R.id.ih_history);
-        itemHeader.setOnClickListener(v -> {
-            // 跳转到图表页面
-            DELEGATE.getSupportDelegate().start(new ChartDelegate());
-        });
+        for(BoxInfo boxInfo : boxInfos) {
+            if (boxInfo.getBoxTypeId().equals(Constants.BOX_TYPE_CTRL)) {
+                controlBox.add(boxInfo);
+            }else if (boxInfo.getBoxTypeId().equals(Constants.BOX_TYPE_WATER)) {
+                waterBox.add(boxInfo);
+            }
+        }
 
         this.position = position;
+        // 设置
+        setWater(container, mView, waterBox);
         // 设置控制器
-        listView = mView.findViewById(R.id.collect_listView);
+        setControl(container, mView, controlBox);
+
+        return mView;
+    }
+
+    private void setWater(ViewGroup container, View mView, List<BoxInfo> waterBox) {
+
+        listView = mView.findViewById(R.id.collect_waterlistView);
+        mErrorLayout = mView.findViewById(R.id.collect_water_error_layout);
+
+        WaterAdapter waterAdapter = new WaterAdapter(container.getContext(),waterBox);
+        if (waterBox != null && waterBox.size() > 0) {
+            listView.setAdapter(waterAdapter);
+            waterAdapter.notifyDataSetChanged();
+            listView.setVisibility(View.VISIBLE);
+            mErrorLayout.setVisibility(View.GONE);
+        } else {
+            // 为空
+            listView.setVisibility(View.GONE);
+            mErrorLayout.setVisibility(View.VISIBLE);
+        }
+    }
+    private void setControl(ViewGroup container, View mView, List<BoxInfo> controlBox) {
+        listView = mView.findViewById(R.id.collect_controllistView);
         mErrorLayout = mView.findViewById(R.id.collect_error_layout);
 
         DeviceAdapter deviceAdapter = new DeviceAdapter(container.getContext(),
-                fishPondDtoList.get(position).getBoxInfoList());
-
-        List<BoxInfo> boxInfos = fishPondDtoList.get(position).getBoxInfoList();
-        if (boxInfos != null && boxInfos.size() > 0) {
+                controlBox);
+        if (controlBox != null && controlBox.size() > 0) {
             listView.setAdapter(deviceAdapter);
             deviceAdapter.notifyDataSetChanged();
             listView.setVisibility(View.VISIBLE);
@@ -112,7 +136,6 @@ public class ViewPageAdapter extends PagerAdapter {
             listView.setVisibility(View.GONE);
             mErrorLayout.setVisibility(View.VISIBLE);
         }
-        return mView;
     }
 
     @Override
