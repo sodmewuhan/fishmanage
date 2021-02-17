@@ -109,24 +109,18 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
         public void onClick(View view) {
             int position = getAdapterPosition();
             Long pondId = fishPondDtos.get(position).getFishPond().getId();
-
-//            switch (view.getId()) {
-//                case R.id.modify_btn:
-//                    LatteLogger.d(TAG,"修改管理模式,"+pondId);
-//                    showModfiyMode(position,this.context);
-//                    break;
-//                case R.id.bind_dev_btn:
-//                    LatteLogger.d(TAG,"绑定设备"+pondId);
-//                    BindDevDelegate bindDevDelegate = new BindDevDelegate();
-//                    // 传递参数
-//                    Bundle bundle = new Bundle();
-//                    bundle.putLong("pondId",pondId);
-//                    bindDevDelegate.setArguments(bundle);
-//                    DELEGATE.getSupportDelegate().start(bindDevDelegate);
-//                    break;
-//                default:
-//                    break;
-//            }
+            if (view.getId()== R.id.modify_btn) {
+                LatteLogger.d(TAG,"修改管理模式,"+pondId);
+                showModfiyMode(position,this.context);
+            } else if (view.getId() == R.id.bind_dev_btn) {
+                LatteLogger.d(TAG,"绑定设备"+pondId);
+                BindDevDelegate bindDevDelegate = new BindDevDelegate();
+                // 传递参数
+                Bundle bundle = new Bundle();
+                bundle.putLong("pondId",pondId);
+                bindDevDelegate.setArguments(bundle);
+                DELEGATE.getParentDelegate().getSupportDelegate().start(bindDevDelegate);
+            }
         }
 
         // 修改管理模式
