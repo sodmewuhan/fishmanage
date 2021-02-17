@@ -6,6 +6,7 @@
     <string name="Device_ID3">设备3</string>
     <string name="Device_ID4">设备4</string>
 
+    <string name="pond_info">塘口信息</string>
     <string name="Device_info_no">您还没有设置任何盒子信息</string>
     <string name="water_info_no">您还没有设置任何水质监测设备信息</string>
 </resources>

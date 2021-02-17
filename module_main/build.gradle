@@ -87,6 +87,8 @@ dependencies {
     implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
     // 进度条
     implementation 'com.liulishuo.magicprogresswidget:library:1.1.1'
+    // 对话框
+    implementation 'com.mylhyl:circleDialog:3.2.2'
     // 其他
     implementation 'com.alibaba:fastjson:1.2.55'
     implementation 'net.danlew:android.joda:2.10.3'

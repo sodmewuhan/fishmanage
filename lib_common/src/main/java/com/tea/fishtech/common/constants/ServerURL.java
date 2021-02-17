@@ -41,7 +41,8 @@ public final class ServerURL {
 
     // 塘口信息
     public static String apiGetAllPondByUser = BASE_URL + "fishPond/getAllPondByUser";
-
+    // 添加塘口信息
+    public static String apiAddPond = BASE_URL + "fishPond/addPond";
     // 修改塘口管理模式
     public static String apiUpdatePond = BASE_URL + "fishPond/updatePond";
     // 修改塘口管理模式

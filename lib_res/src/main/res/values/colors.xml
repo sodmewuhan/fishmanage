@@ -15,6 +15,11 @@
     <color name="transparent">#00000000</color>
     <color name="image_view_btn_pressed_bgColor">#30000000</color>
     <color name="bg_common_gray">#ffe2e2e2</color>
+    <color name="app_yellow">#ffff4c06</color>
+    <color name="detail_merchant_info_color">#ff3c3c3c</color>
+
+    <!-- GoodsListItem 首页最下面的listView -->
+    <color name="title_color">#ffff621d</color>
 
     <!-- TitleBar -->
     <color name="title_bar_color">#ffffffff</color>

@@ -5,19 +5,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.google.common.collect.Lists;
 import com.tea.fishtech.common.constants.Constants;
-import com.tea.fishtech.common.model.BoxAndWaterStatusDTO;
 import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.common.model.FishPondDto;
 import com.tea.fishtech.common.utils.log.LatteLogger;
 import com.tea.fishtech.main.R;
-import com.tea.fishtech.main.ui.chart.ChartDelegate;
 import com.tea.fishtech.ui.delegates.LatteDelegate;
 import com.tea.fishtech.ui.widget.ItemHeader;
 

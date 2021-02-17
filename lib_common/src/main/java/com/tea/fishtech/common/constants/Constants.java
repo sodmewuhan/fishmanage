@@ -28,6 +28,8 @@ public final class Constants {
     // 水质检测器
     public final static String BOX_TYPE_WATER = "1002";
 
+    public final static String USER_NAME = "userName";
+
     /**
      * AES加密用的key
      */
