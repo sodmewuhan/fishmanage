@@ -11,6 +11,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.google.common.collect.Lists;
 import com.tea.fishtech.common.constants.Constants;
+import com.tea.fishtech.common.model.BoxAndWaterStatusDTO;
 import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.common.model.FishPondDto;
 import com.tea.fishtech.common.utils.log.LatteLogger;
@@ -82,6 +83,8 @@ public class ViewPageAdapter extends PagerAdapter {
         List<BoxInfo> boxInfos = fishPondDtoList.get(position).getBoxInfoList();
         List<BoxInfo> controlBox = Lists.newArrayList();
         List<BoxInfo> waterBox = Lists.newArrayList();
+        List<BoxAndWaterStatusDTO> boxAndWaterStatusDTOList =
+                fishPondDtoList.get(position).getBoxAndWaterStatusDTOList();
 
         for(BoxInfo boxInfo : boxInfos) {
             if (boxInfo.getBoxTypeId().equals(Constants.BOX_TYPE_CTRL)) {
@@ -93,19 +96,20 @@ public class ViewPageAdapter extends PagerAdapter {
 
         this.position = position;
         // 设置
-        setWater(container, mView, waterBox);
+        setWater(container, mView, waterBox,boxAndWaterStatusDTOList);
         // 设置控制器
         setControl(container, mView, controlBox);
 
         return mView;
     }
 
-    private void setWater(ViewGroup container, View mView, List<BoxInfo> waterBox) {
+    private void setWater(ViewGroup container, View mView, List<BoxInfo> waterBox,
+                          List<BoxAndWaterStatusDTO> boxAndWaterStatusDTOList) {
 
         listView = mView.findViewById(R.id.collect_waterlistView);
         mErrorLayout = mView.findViewById(R.id.collect_water_error_layout);
 
-        WaterAdapter waterAdapter = new WaterAdapter(container.getContext(),waterBox);
+        WaterAdapter waterAdapter = new WaterAdapter(container.getContext(),waterBox,boxAndWaterStatusDTOList);
         if (waterBox != null && waterBox.size() > 0) {
             listView.setAdapter(waterAdapter);
             waterAdapter.notifyDataSetChanged();

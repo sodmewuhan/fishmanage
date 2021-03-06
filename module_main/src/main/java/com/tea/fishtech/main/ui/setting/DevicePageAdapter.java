@@ -1,0 +1,71 @@
+package com.tea.fishtech.main.ui.setting;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
+
+import com.tea.fishtech.common.utils.log.LatteLogger;
+import com.tea.fishtech.main.R;
+import com.tea.fishtech.ui.delegates.LatteDelegate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DevicePageAdapter extends PagerAdapter {
+
+    private LatteDelegate delegate;
+
+    private List<String> mDataList = new ArrayList<>();
+
+    private String title;
+
+    private int position ;
+
+    public DevicePageAdapter(LatteDelegate delegate, List<String> title) {
+        this.delegate = delegate;
+        this.mDataList = title;
+    }
+
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        //return super.instantiateItem(container, position);
+        LatteLogger.d("instantiateItem fun");
+        View mView = LayoutInflater.from(container.getContext()).inflate(R.layout.adapter_dev_page, null);
+
+
+        return mView;
+    }
+
+    @Override
+    public int getCount() {
+        return mDataList.size();
+    }
+
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return view == object;
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+        container.removeView((View) object);
+    }
+
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mDataList.get(position);
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+}

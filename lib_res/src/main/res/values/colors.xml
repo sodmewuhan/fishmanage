@@ -29,4 +29,11 @@
     <color name="textColor_32">#ff323232</color>
     <color name="title_bar_search_color">#ffe55c26</color>
     <color name="title_bar_search_text_color">#ffffa37e</color>
+
+    <color name="color_4d">#4d4d4d</color>
+    <color name="color_53">#53575e</color>
+    <color name="color_69">#999999</color>
+    <color name="color_f0">#F0F0F0</color>
+    <color name="color_f2">#F2F2F2</color>
+    <color name="color_fa">#FAFAFA</color>
 </resources>

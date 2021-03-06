@@ -151,7 +151,7 @@ public class IndexDelegate extends BottomItemDelegate {
                 SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
                 simplePagerTitleView.setText(fishPondDtos.get(index).getFishPond().getPondName());
                 simplePagerTitleView.setNormalColor(Color.parseColor("#333333"));
-                simplePagerTitleView.setSelectedColor(Color.parseColor("#e94220"));
+                simplePagerTitleView.setSelectedColor(Color.parseColor("#ffff621d"));
                 simplePagerTitleView.setTextSize(16f);
                 simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
                     @Override

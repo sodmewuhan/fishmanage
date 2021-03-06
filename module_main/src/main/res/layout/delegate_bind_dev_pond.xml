@@ -23,16 +23,40 @@
             android:textColor="@color/textColor_32"/>
     </RelativeLayout>
 
-    <!-- 绑定设备信息 -->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/layout">
+    <View
+        style="@style/PrimaryHLine"
+        android:layout_width="match_parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_bind_device_list"
+    <net.lucode.hackware.magicindicator.MagicIndicator
+        android:id="@+id/magic_indicator1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/common_navigator_height"
+        android:layout_marginTop="@dimen/navigator_margin_top" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<androidx.viewpager.widget.ViewPager-->
+        <com.tea.fishtech.ui.widget.ScrollViewPage
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_above="@+id/magic_indicator1"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:layout_weight="1" />
+    </androidx.core.widget.NestedScrollView>
+
+<!--    &lt;!&ndash; 绑定设备信息 &ndash;&gt;-->
+<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/layout">-->
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_bind_device_list"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent" />-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/bind_flaot_btn"
@@ -43,6 +67,5 @@
             app:backgroundTint="@color/fab_ripple"
             android:layout_gravity="right|bottom" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

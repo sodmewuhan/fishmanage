@@ -11,4 +11,15 @@
     <string name="water_info_no">您还没有设置任何水质监测设备信息</string>
 
     <string name="bind_device">设备绑定</string>
+    <string name="oxygen">溶解氧</string>
+    <string name="ph">PH值</string>
+    <string name="temp">温度</string>
+    <string name="water_dev">水质探测器</string>
+    <string name="valueNone">#</string>
+
+
+    <!-- iconfont -->
+    <string name="remove">&#xe601;</string>
+    <string name="water">&#xe60f;</string>
+    <string name="device">&#xe600;</string>
 </resources>
