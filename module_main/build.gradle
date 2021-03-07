@@ -91,7 +91,8 @@ dependencies {
     // iconfont
     implementation "com.mikepenz:iconics-core:3.2.5"
     implementation 'com.mikepenz:ionicons-typeface:2.0.1.5@aar'
-
+    // 通用title bar
+    implementation 'com.hjq:titlebar:8.2'
     // 其他
     implementation 'com.alibaba:fastjson:1.2.55'
     implementation 'net.danlew:android.joda:2.10.3'

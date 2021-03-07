@@ -7,24 +7,17 @@
     android:background="#f5f5f5"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/common_titleBar_height"
-        android:background="@color/title_bar_color">
-        <ImageView
-            android:id="@+id/register_titleBar_iv_back"
-            style="@style/common_left_back_imageView_style"/>
-        <TextView
-            style="@style/base_textView_style"
-            android:layout_centerInParent="true"
-            android:gravity="center_vertical"
-            android:text="@string/bind_device"
-            android:textSize="@dimen/login_titleBar_login_size"
-            android:textColor="@color/textColor_32"/>
-    </RelativeLayout>
+    <com.hjq.bar.TitleBar
+        android:id="@+id/dev_titlebar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        app:leftTitle="返回"
+        app:rightTitle="添加"
+        app:title="设备管理" />
 
     <View
-        style="@style/PrimaryHLine"
+        style="@style/SecondHLine"
         android:layout_width="match_parent" />
 
     <net.lucode.hackware.magicindicator.MagicIndicator
@@ -57,15 +50,6 @@
 <!--            android:id="@+id/rv_bind_device_list"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="match_parent" />-->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/bind_flaot_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:src="@mipmap/ic_toolbar_add"
-            app:backgroundTint="@color/fab_ripple"
-            android:layout_gravity="right|bottom" />
 
 
 </LinearLayout>

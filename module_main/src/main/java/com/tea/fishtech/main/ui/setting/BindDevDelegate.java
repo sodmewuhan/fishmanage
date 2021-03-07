@@ -16,6 +16,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.collect.Lists;
+import com.hjq.bar.OnTitleBarListener;
+import com.hjq.bar.TitleBar;
 import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.constants.ServerURL;
 import com.tea.fishtech.common.constants.TestConstants;
@@ -36,6 +38,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNav
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.WrapPagerIndicator;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ClipPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +47,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import es.dmoral.toasty.Toasty;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -61,11 +65,11 @@ public class BindDevDelegate extends LatteDelegate {
 
     private List<String> titleList = Lists.newArrayList();
 
-    @BindView(R2.id.register_titleBar_iv_back)
-    ImageView mTitleBarIvBack;
+    @BindView(R2.id.dev_titlebar)
+    TitleBar titleBar;
 
-    @BindView(R2.id.bind_flaot_btn)
-    FloatingActionButton fab;
+//    @BindView(R2.id.bind_flaot_btn)
+//    FloatingActionButton fab;
 
     @BindView(R2.id.magic_indicator1)
     MagicIndicator magicIndicator;
@@ -102,6 +106,7 @@ public class BindDevDelegate extends LatteDelegate {
         ponId = getArguments().getLong("pondId");
         initData();
 
+        initListener();
         initControl();
         //getUnBindDev();
         LatteLogger.d("ponid is " + ponId);
@@ -111,6 +116,7 @@ public class BindDevDelegate extends LatteDelegate {
      * 初始化控件
      */
     private void initControl() {
+
         devicePageAdapter = new DevicePageAdapter(getParentDelegate(),titleList);
         viewPager.setAdapter(devicePageAdapter);
         magicIndicator.setBackgroundColor(Color.WHITE);
@@ -127,6 +133,7 @@ public class BindDevDelegate extends LatteDelegate {
 
             @Override
             public IPagerTitleView getTitleView(Context context, int index) {
+
                 SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
                 simplePagerTitleView.setText(titleList.get(index));
                 simplePagerTitleView.setNormalColor(Color.parseColor("#333333"));
@@ -140,15 +147,16 @@ public class BindDevDelegate extends LatteDelegate {
                         devicePageAdapter.setPosition(index);
                         devicePageAdapter.notifyDataSetChanged();
                     }
+
+
                 });
                 return simplePagerTitleView;
             }
 
+
             @Override
             public IPagerIndicator getIndicator(Context context) {
-                WrapPagerIndicator indicator = new WrapPagerIndicator(context);
-                indicator.setFillColor(Color.parseColor("#ebe4e3"));
-                return indicator;
+                return null;
             }
         });
 
@@ -156,25 +164,33 @@ public class BindDevDelegate extends LatteDelegate {
         ViewPagerHelper.bind(magicIndicator, viewPager);
     }
 
-    @OnClick({R2.id.register_titleBar_iv_back})
-    public void clickEventPerform(View view) {
+    private void  initListener() {
+        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
-        if (view.getId() == R.id.register_titleBar_iv_back) {
-            getActivity().onBackPressed();
-        }
+            @Override
+            public void onLeftClick(View v) {
+                getSupportDelegate().pop();
+            }
+
+            @Override
+            public void onTitleClick(View v) {
+            }
+
+            @Override
+            public void onRightClick(View v) {
+                addDevList();
+            }
+        });
     }
 
 
 
-    /**
-     * 添加用户需要绑定的盒子
-     * @param view
-     */
-    @OnClick(R2.id.bind_flaot_btn)
-    public void fabClick(View view) {
-        // 绑定设备
-        addDevList();
-    }
+
+//    @OnClick(R2.id.bind_flaot_btn)
+//    public void fabClick(View view) {
+//        // 绑定设备
+//        addDevList();
+//    }
 
     private void addDevList() {
         // 采用Android-PickerView 下拉实现

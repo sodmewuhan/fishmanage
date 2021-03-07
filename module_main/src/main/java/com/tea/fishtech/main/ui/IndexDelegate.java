@@ -168,9 +168,10 @@ public class IndexDelegate extends BottomItemDelegate {
 
             @Override
             public IPagerIndicator getIndicator(Context context) {
-                WrapPagerIndicator indicator = new WrapPagerIndicator(context);
-                indicator.setFillColor(Color.parseColor("#ebe4e3"));
-                return indicator;
+//                WrapPagerIndicator indicator = new WrapPagerIndicator(context);
+//                indicator.setFillColor(Color.parseColor("#ebe4e3"));
+//                return indicator;
+                return null;
             }
         });
 
