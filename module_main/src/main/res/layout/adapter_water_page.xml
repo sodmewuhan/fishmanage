@@ -20,7 +20,7 @@
             android:gravity="center"
             android:drawableTop="@mipmap/net_failed"
             android:drawablePadding="10dp"
-            android:text="@string/Device_info_no"
+            android:text="@string/water_info_no"
             android:textColor="@color/gray01"
             android:textSize="@dimen/textSize_16"
             android:visibility="visible"/>

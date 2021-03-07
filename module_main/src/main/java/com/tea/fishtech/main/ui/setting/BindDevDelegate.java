@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.collect.Lists;
+import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.constants.ServerURL;
 import com.tea.fishtech.common.constants.TestConstants;
 import com.tea.fishtech.common.model.BoxInfo;
@@ -188,8 +189,8 @@ public class BindDevDelegate extends LatteDelegate {
     private void initData() {
         try {
 
-            titleList.add("水质探头");
-            titleList.add("控制器");
+            titleList.add(Constants.DEV_TYPE_NAME_WATER);
+            titleList.add(Constants.DEV_TYPE_NAME_CONTROL);
 
             BoxInfo boxInfo = new BoxInfo();
             boxInfo.setFishPondId(ponId);

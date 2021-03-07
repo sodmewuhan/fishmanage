@@ -3,10 +3,12 @@ package com.tea.fishtech.main.ui.setting;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.utils.log.LatteLogger;
 import com.tea.fishtech.main.R;
 import com.tea.fishtech.ui.delegates.LatteDelegate;
@@ -34,9 +36,17 @@ public class DevicePageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         //return super.instantiateItem(container, position);
         LatteLogger.d("instantiateItem fun");
-        View mView = LayoutInflater.from(container.getContext()).inflate(R.layout.adapter_dev_page, null);
+        View mView = null;
 
-
+        if (mDataList.get(position).equals(Constants.DEV_TYPE_NAME_WATER)) {
+            // 水质
+            mView = LayoutInflater.from(container.getContext()).inflate(R.layout.adapter_water_page, null);
+            container.addView(mView);
+        } else {
+            // 控制器
+            mView = LayoutInflater.from(container.getContext()).inflate(R.layout.adapter_dev_page, null);
+            container.addView(mView);
+        }
         return mView;
     }
 

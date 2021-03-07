@@ -1,5 +1,7 @@
 package com.tea.fishtech.common.constants;
 
+import retrofit2.http.PUT;
+
 /**
  * 全局静态变量
  */
@@ -45,4 +47,10 @@ public final class Constants {
      * TOKEN 过期
      */
     public static final Integer AUTHORIZATION_TOKEN_EXPIRED = 403;
+
+    public static final Integer DEV_TYPE_NAME_CODE = 1001;
+
+    public static final String DEV_TYPE_NAME_WATER = "水质探头";
+
+    public static final String DEV_TYPE_NAME_CONTROL = "控制器";
 }
