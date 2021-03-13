@@ -20,6 +20,13 @@
         style="@style/SecondHLine"
         android:layout_width="match_parent" />
 
+    <com.zhengsr.tablib.view.flow.TabFlowLayout
+        android:id="@+id/resflow"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#6D8FB0"
+        android:layout_height="wrap_content"/>
+
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/magic_indicator1"
         android:layout_width="match_parent"
@@ -40,16 +47,7 @@
             android:layout_weight="1" />
     </androidx.core.widget.NestedScrollView>
 
-<!--    &lt;!&ndash; 绑定设备信息 &ndash;&gt;-->
-<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@+id/layout">-->
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/rv_bind_device_list"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
 
 
 </LinearLayout>

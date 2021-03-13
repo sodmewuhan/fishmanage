@@ -1,9 +1,12 @@
 package com.tea.fishtech.main.ui.setting;
 
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -36,8 +39,8 @@ public class DevicePageAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         //return super.instantiateItem(container, position);
         LatteLogger.d("instantiateItem fun");
-        View mView = null;
-
+        View mView;
+//
         if (mDataList.get(position).equals(Constants.DEV_TYPE_NAME_WATER)) {
             // 水质
             mView = LayoutInflater.from(container.getContext()).inflate(R.layout.adapter_water_page, null);
@@ -67,15 +70,12 @@ public class DevicePageAdapter extends PagerAdapter {
 
     @Override
     public int getItemPosition(Object object) {
+
         return POSITION_NONE;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         return mDataList.get(position);
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
     }
 }

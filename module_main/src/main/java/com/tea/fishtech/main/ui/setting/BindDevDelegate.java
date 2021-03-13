@@ -4,17 +4,19 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.collect.Lists;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -24,21 +26,23 @@ import com.tea.fishtech.common.constants.TestConstants;
 import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.common.model.Result;
 import com.tea.fishtech.common.net.RestCreator;
+import com.tea.fishtech.common.ui.navigator.CommonNavigatorNew;
 import com.tea.fishtech.common.utils.log.LatteLogger;
 import com.tea.fishtech.main.R;
 import com.tea.fishtech.main.R2;
-import com.tea.fishtech.main.ui.adapter.ViewPageAdapter;
 import com.tea.fishtech.ui.delegates.LatteDelegate;
 import com.tea.fishtech.ui.widget.ScrollViewPage;
+import com.zhengsr.tablib.view.adapter.TabFlowAdapter;
+import com.zhengsr.tablib.view.flow.TabFlowLayout;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.UIUtil;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.WrapPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ClipPagerTitleView;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 import org.apache.commons.lang3.StringUtils;
@@ -68,21 +72,18 @@ public class BindDevDelegate extends LatteDelegate {
     @BindView(R2.id.dev_titlebar)
     TitleBar titleBar;
 
-//    @BindView(R2.id.bind_flaot_btn)
-//    FloatingActionButton fab;
-
     @BindView(R2.id.magic_indicator1)
     MagicIndicator magicIndicator;
 
     @BindView(R2.id.view_pager)
     ScrollViewPage viewPager;
 
-    private CommonNavigator mCommonNavigator;
+    @BindView(R2.id.resflow)
+    TabFlowLayout flowLayout;
+
+    private CommonNavigatorNew mCommonNavigator;
 
     private DevicePageAdapter devicePageAdapter;
-
-//    @BindView(R2.id.rv_bind_device_list)
-//    RecyclerView mRecyclerView = null;
 
     // 未绑定的设备
     private List<BoxInfo> unBindDev = Lists.newArrayList();
@@ -106,9 +107,10 @@ public class BindDevDelegate extends LatteDelegate {
         ponId = getArguments().getLong("pondId");
         initData();
 
-        initListener();
+//        initListener();
         initControl();
-        //getUnBindDev();
+
+//        initMagicIndicator2();
         LatteLogger.d("ponid is " + ponId);
     }
 
@@ -120,7 +122,7 @@ public class BindDevDelegate extends LatteDelegate {
         devicePageAdapter = new DevicePageAdapter(getParentDelegate(),titleList);
         viewPager.setAdapter(devicePageAdapter);
         magicIndicator.setBackgroundColor(Color.WHITE);
-        mCommonNavigator = new CommonNavigator(getContext());
+        mCommonNavigator = new CommonNavigatorNew(getContext());
         mCommonNavigator.setSkimOver(true);
         mCommonNavigator.setAdjustMode(true);
         mCommonNavigator.setScrollPivotX(0.35f);
@@ -144,7 +146,7 @@ public class BindDevDelegate extends LatteDelegate {
                     public void onClick(View v) {
                         LatteLogger.d("名字:" + titleList.get(index)+ "index is " + index);
                         viewPager.setCurrentItem(index);
-                        devicePageAdapter.setPosition(index);
+//                        devicePageAdapter.setPosition(index);
                         devicePageAdapter.notifyDataSetChanged();
                     }
 
@@ -164,33 +166,86 @@ public class BindDevDelegate extends LatteDelegate {
         ViewPagerHelper.bind(magicIndicator, viewPager);
     }
 
-    private void  initListener() {
-        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
 
+    private void initMagicIndicator2() {
+        devicePageAdapter = new DevicePageAdapter(getParentDelegate(),titleList);
+        viewPager.setAdapter(devicePageAdapter);
+
+        magicIndicator.setBackgroundColor(Color.WHITE);
+        CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdjustMode(true);
+        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
             @Override
-            public void onLeftClick(View v) {
-                getSupportDelegate().pop();
+            public int getCount() {
+                return titleList == null ? 0 : titleList.size();
             }
 
             @Override
-            public void onTitleClick(View v) {
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
+                simplePagerTitleView.setText(titleList.get(index));
+                simplePagerTitleView.setTextSize(18);
+                simplePagerTitleView.setNormalColor(Color.parseColor("#616161"));
+                simplePagerTitleView.setSelectedColor(Color.parseColor("#f57c00"));
+                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        viewPager.setCurrentItem(index);
+                        devicePageAdapter.notifyDataSetChanged();
+                    }
+                });
+                return simplePagerTitleView;
             }
 
             @Override
-            public void onRightClick(View v) {
-                addDevList();
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator indicator = new LinePagerIndicator(context);
+                indicator.setStartInterpolator(new AccelerateInterpolator());
+                indicator.setEndInterpolator(new DecelerateInterpolator(1.6f));
+                indicator.setYOffset(UIUtil.dip2px(context, 39));
+                indicator.setLineHeight(UIUtil.dip2px(context, 1));
+                indicator.setColors(Color.parseColor("#f57c00"));
+                return indicator;
+            }
+
+            @Override
+            public float getTitleWeight(Context context, int index) {
+                if (index == 0) {
+                    return 2.0f;
+                } else if (index == 1) {
+                    return 1.2f;
+                } else {
+                    return 1.0f;
+                }
             }
         });
+        magicIndicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(magicIndicator, viewPager);
     }
 
+    private void  initListener() {
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                magicIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            }
 
+            @Override
+            public void onPageSelected(int position) {
+                LatteLogger.d("the position is" + position);
+                magicIndicator.onPageSelected(position);
+            }
 
-//    @OnClick(R2.id.bind_flaot_btn)
-//    public void fabClick(View view) {
-//        // 绑定设备
-//        addDevList();
-//    }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                magicIndicator.onPageScrollStateChanged(state);
+            }
+        });
+
+        viewPager.setCurrentItem(2);
+    }
+
 
     private void addDevList() {
         // 采用Android-PickerView 下拉实现

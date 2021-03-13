@@ -7,6 +7,8 @@ import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
+import com.tea.fishtech.common.utils.log.LatteLogger;
+
 public class ScrollViewPage extends ViewPager {
 
     private float xDistance, yDistance, xLast, yLast;
@@ -59,6 +61,7 @@ public class ScrollViewPage extends ViewPager {
         }
         //height = 10000;
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
+        LatteLogger.d("the heightMeasureSpec is " + heightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 }
