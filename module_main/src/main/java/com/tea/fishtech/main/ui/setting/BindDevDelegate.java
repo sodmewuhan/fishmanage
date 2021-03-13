@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -32,8 +33,6 @@ import com.tea.fishtech.main.R;
 import com.tea.fishtech.main.R2;
 import com.tea.fishtech.ui.delegates.LatteDelegate;
 import com.tea.fishtech.ui.widget.ScrollViewPage;
-import com.zhengsr.tablib.view.adapter.TabFlowAdapter;
-import com.zhengsr.tablib.view.flow.TabFlowLayout;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -76,14 +75,14 @@ public class BindDevDelegate extends LatteDelegate {
     MagicIndicator magicIndicator;
 
     @BindView(R2.id.view_pager)
-    ScrollViewPage viewPager;
+    ViewPager viewPager;
 
-    @BindView(R2.id.resflow)
-    TabFlowLayout flowLayout;
 
-    private CommonNavigatorNew mCommonNavigator;
+    private CommonNavigator mCommonNavigator;
 
-    private DevicePageAdapter devicePageAdapter;
+//    private DevicePageAdapter devicePageAdapter;
+
+    private DeviceFragmentAdapter deviceFragmentAdapter;
 
     // 未绑定的设备
     private List<BoxInfo> unBindDev = Lists.newArrayList();
@@ -110,7 +109,6 @@ public class BindDevDelegate extends LatteDelegate {
 //        initListener();
         initControl();
 
-//        initMagicIndicator2();
         LatteLogger.d("ponid is " + ponId);
     }
 
@@ -119,10 +117,15 @@ public class BindDevDelegate extends LatteDelegate {
      */
     private void initControl() {
 
-        devicePageAdapter = new DevicePageAdapter(getParentDelegate(),titleList);
-        viewPager.setAdapter(devicePageAdapter);
+//        devicePageAdapter = new DevicePageAdapter(getParentDelegate(),titleList);
+
+//        viewPager.setAdapter(devicePageAdapter);
+        deviceFragmentAdapter = new DeviceFragmentAdapter(getChildFragmentManager(),
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,titleList);
+        viewPager.setAdapter(deviceFragmentAdapter);
+
         magicIndicator.setBackgroundColor(Color.WHITE);
-        mCommonNavigator = new CommonNavigatorNew(getContext());
+        mCommonNavigator = new CommonNavigator(getContext());
         mCommonNavigator.setSkimOver(true);
         mCommonNavigator.setAdjustMode(true);
         mCommonNavigator.setScrollPivotX(0.35f);
@@ -146,8 +149,8 @@ public class BindDevDelegate extends LatteDelegate {
                     public void onClick(View v) {
                         LatteLogger.d("名字:" + titleList.get(index)+ "index is " + index);
                         viewPager.setCurrentItem(index);
-//                        devicePageAdapter.setPosition(index);
-                        devicePageAdapter.notifyDataSetChanged();
+//                        deviceFragmentAdapter.setPosition(index);
+                        deviceFragmentAdapter.notifyDataSetChanged();
                     }
 
 
@@ -167,84 +170,27 @@ public class BindDevDelegate extends LatteDelegate {
     }
 
 
-    private void initMagicIndicator2() {
-        devicePageAdapter = new DevicePageAdapter(getParentDelegate(),titleList);
-        viewPager.setAdapter(devicePageAdapter);
-
-        magicIndicator.setBackgroundColor(Color.WHITE);
-        CommonNavigator commonNavigator = new CommonNavigator(getContext());
-        commonNavigator.setAdjustMode(true);
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-            @Override
-            public int getCount() {
-                return titleList == null ? 0 : titleList.size();
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new SimplePagerTitleView(context);
-                simplePagerTitleView.setText(titleList.get(index));
-                simplePagerTitleView.setTextSize(18);
-                simplePagerTitleView.setNormalColor(Color.parseColor("#616161"));
-                simplePagerTitleView.setSelectedColor(Color.parseColor("#f57c00"));
-                simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        viewPager.setCurrentItem(index);
-                        devicePageAdapter.notifyDataSetChanged();
-                    }
-                });
-                return simplePagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setStartInterpolator(new AccelerateInterpolator());
-                indicator.setEndInterpolator(new DecelerateInterpolator(1.6f));
-                indicator.setYOffset(UIUtil.dip2px(context, 39));
-                indicator.setLineHeight(UIUtil.dip2px(context, 1));
-                indicator.setColors(Color.parseColor("#f57c00"));
-                return indicator;
-            }
-
-            @Override
-            public float getTitleWeight(Context context, int index) {
-                if (index == 0) {
-                    return 2.0f;
-                } else if (index == 1) {
-                    return 1.2f;
-                } else {
-                    return 1.0f;
-                }
-            }
-        });
-        magicIndicator.setNavigator(commonNavigator);
-        ViewPagerHelper.bind(magicIndicator, viewPager);
-    }
-
-    private void  initListener() {
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                magicIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels);
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                LatteLogger.d("the position is" + position);
-                magicIndicator.onPageSelected(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                magicIndicator.onPageScrollStateChanged(state);
-            }
-        });
-
-        viewPager.setCurrentItem(2);
-    }
+//    private void  initListener() {
+//
+//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                magicIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels);
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                LatteLogger.d("the position is" + position);
+//                magicIndicator.onPageSelected(position);
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//                magicIndicator.onPageScrollStateChanged(state);
+//            }
+//        });
+//
+//    }
 
 
     private void addDevList() {

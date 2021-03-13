@@ -20,12 +20,6 @@
         style="@style/SecondHLine"
         android:layout_width="match_parent" />
 
-    <com.zhengsr.tablib.view.flow.TabFlowLayout
-        android:id="@+id/resflow"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:background="#6D8FB0"
-        android:layout_height="wrap_content"/>
 
     <net.lucode.hackware.magicindicator.MagicIndicator
         android:id="@+id/magic_indicator1"
@@ -33,19 +27,16 @@
         android:layout_height="@dimen/common_navigator_height"
         android:layout_marginTop="@dimen/navigator_margin_top" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <!--<androidx.viewpager.widget.ViewPager-->
-        <com.tea.fishtech.ui.widget.ScrollViewPage
+
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_above="@+id/magic_indicator1"
             android:layout_height="wrap_content"
             android:fillViewport="true"
             android:layout_weight="1" />
-    </androidx.core.widget.NestedScrollView>
+
 
 
 
