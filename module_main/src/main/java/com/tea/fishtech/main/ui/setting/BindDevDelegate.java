@@ -93,7 +93,7 @@ public class BindDevDelegate extends LatteDelegate {
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         ponId = getArguments().getLong("pondId");
         initData();
-        initControl();
+
 
         LatteLogger.d("ponid is " + ponId);
     }
@@ -217,6 +217,8 @@ public class BindDevDelegate extends LatteDelegate {
                                     });
                             if ("SUCCESS".equals(result.getMessage())) {
                                 boxInfos = result.getData();
+                                // 有数据后绑定
+                                initControl();
                             }
                         }
 

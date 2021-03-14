@@ -32,7 +32,7 @@ public class DeviceFragmentAdapter extends FragmentPagerAdapter {
 
         if (CollectionUtils.isNotEmpty(boxInfos)) {
             for(BoxInfo obj : boxInfos) {
-                if (Constants.DEV_TYPE_NAME_CONTROL.equals(obj.getBoxTypeId())) {
+                if (Constants.BOX_TYPE_CTRL.equals(obj.getBoxTypeId())) {
                     devList.add(obj);
                 } else if (Constants.BOX_TYPE_WATER.equals(obj.getBoxTypeId())) {
                     waterList.add(obj);

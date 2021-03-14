@@ -14,13 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.common.collect.Lists;
 import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.main.R;
-import com.tea.fishtech.main.R2;
 import com.tea.fishtech.main.ui.adapter.DeviceSettingAdapter;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class DevFragment extends Fragment {
 
@@ -31,15 +27,13 @@ public class DevFragment extends Fragment {
     private LinearLayoutManager mLayoutManager;
 
     // 列表信息
-    @BindView(R2.id.rv_dev_list)
     RecyclerView devListView = null;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dev, container,false);
-
-        ButterKnife.bind(this.getActivity());
+        devListView = view.findViewById(R.id.rv_dev_list);
         setRecyclerView();
         return view;
     }
