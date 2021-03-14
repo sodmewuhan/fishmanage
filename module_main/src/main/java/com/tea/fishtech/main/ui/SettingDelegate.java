@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.collect.Lists;
+import com.hjq.bar.TitleBar;
 import com.mylhyl.circledialog.BaseCircleDialog;
 import com.mylhyl.circledialog.CircleDialog;
 import com.tea.fishtech.common.constants.Constants;
@@ -59,8 +60,11 @@ public class SettingDelegate extends BottomItemDelegate  {
     /**
      * 增加按钮
      */
-    @BindView(R2.id.flaot_btn)
-    FloatingActionButton fab;
+//    @BindView(R2.id.flaot_btn)
+//    FloatingActionButton fab;
+
+    @BindView(R2.id.dev_titlebar)
+    TitleBar titleBar;
 
     // 列表信息
     @BindView(R2.id.rv_pond_list)
@@ -95,12 +99,12 @@ public class SettingDelegate extends BottomItemDelegate  {
      * 添加塘口信息
      * @param view
      */
-    @OnClick(R2.id.flaot_btn)
-    public void fabClick(View view) {
-
-        //getParentDelegate().getSupportDelegate().start(new AddPondDelegate());
-        addPond();
-    }
+//    @OnClick(R2.id.flaot_btn)
+//    public void fabClick(View view) {
+//
+//        //getParentDelegate().getSupportDelegate().start(new AddPondDelegate());
+//        addPond();
+//    }
 
     @Override
     public void post(Runnable runnable) {

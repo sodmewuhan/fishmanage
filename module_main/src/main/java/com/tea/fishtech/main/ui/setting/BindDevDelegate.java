@@ -12,14 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.google.common.collect.Lists;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.constants.ServerURL;
-import com.tea.fishtech.common.constants.TestConstants;
 import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.common.model.Result;
 import com.tea.fishtech.common.net.RestCreator;
@@ -35,8 +33,6 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNav
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -75,9 +71,6 @@ public class BindDevDelegate extends LatteDelegate {
 
      //未绑定的设备
     private List<BoxInfo> boxInfos = Lists.newArrayList();
-//
-//    // 已经绑定设备
-//    private List<BoxInfo> bindDev = Lists.newArrayList();
 
     private Long ponId = null;
 
@@ -175,16 +168,6 @@ public class BindDevDelegate extends LatteDelegate {
         });
 
     }
-
-
-//    private void addDevList() {
-//        // 采用Android-PickerView 下拉实现
-//        List<String> unBindDevId = Lists.newArrayList();
-//        for(BoxInfo boxInfo: unBindDev) {
-//            unBindDevId.add(boxInfo.getBoxNumber());
-//        }
-//
-//    }
 
     // 得到当前已经绑定的数据
     private void initData() {
@@ -338,14 +321,4 @@ public class BindDevDelegate extends LatteDelegate {
     public void post(Runnable runnable) {
 
     }
-
-
-//    private void setRecyclerView(List<BoxInfo> boxInfos) {
-//        bindDevAdapter = new BindDevAdapter(boxInfos,this);
-//        mLayoutManager = new LinearLayoutManager(getContext());
-//
-////        mRecyclerView.setLayoutManager(mLayoutManager);
-////        mRecyclerView.setAdapter(bindDevAdapter);
-//
-//    }
 }
