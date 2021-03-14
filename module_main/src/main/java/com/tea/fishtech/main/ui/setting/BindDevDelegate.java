@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.google.common.collect.Lists;
+import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.constants.ServerURL;
@@ -93,8 +94,7 @@ public class BindDevDelegate extends LatteDelegate {
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         ponId = getArguments().getLong("pondId");
         initData();
-
-
+        initListener();
         LatteLogger.d("ponid is " + ponId);
     }
 
@@ -153,27 +153,27 @@ public class BindDevDelegate extends LatteDelegate {
     }
 
 
-//    private void  initListener() {
-//
-//        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                magicIndicator.onPageScrolled(position, positionOffset, positionOffsetPixels);
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                LatteLogger.d("the position is" + position);
-//                magicIndicator.onPageSelected(position);
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//                magicIndicator.onPageScrollStateChanged(state);
-//            }
-//        });
-//
-//    }
+    private void  initListener() {
+
+        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
+
+            @Override
+            public void onLeftClick(View v) {
+                getSupportDelegate().pop();
+            }
+
+            @Override
+            public void onTitleClick(View v) {
+
+            }
+
+            @Override
+            public void onRightClick(View v) {
+                // TODO 添加
+            }
+        });
+
+    }
 
 
 //    private void addDevList() {
