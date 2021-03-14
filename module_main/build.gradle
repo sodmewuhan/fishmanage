@@ -88,6 +88,9 @@ dependencies {
     implementation 'com.liulishuo.magicprogresswidget:library:1.1.1'
     // 对话框
     implementation 'com.mylhyl:circleDialog:3.2.2'
+    // 日期，其他选择
+    //implementation 'com.contrarywind:Android-PickerView:4.1.9'
+    implementation  'com.github.addappcn:android-pickers:2.0.0'
     // iconfont
     implementation "com.mikepenz:iconics-core:3.2.5"
     implementation 'com.mikepenz:ionicons-typeface:2.0.1.5@aar'

@@ -15,6 +15,7 @@ import com.google.common.collect.Lists;
 import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.main.R;
 import com.tea.fishtech.main.ui.adapter.DeviceSettingAdapter;
+import com.tea.fishtech.ui.delegates.LatteDelegate;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public class DevFragment extends Fragment {
     private DeviceSettingAdapter deviceSettingAdapter;
 
     private LinearLayoutManager mLayoutManager;
+
+    private LatteDelegate DELEGATE;
 
     // 列表信息
     RecyclerView devListView = null;
@@ -47,9 +50,17 @@ public class DevFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        deviceSettingAdapter = new DeviceSettingAdapter(this.boxInfoList);
+        deviceSettingAdapter = new DeviceSettingAdapter(this.boxInfoList,DELEGATE);
         mLayoutManager = new LinearLayoutManager(getContext());
         devListView.setLayoutManager(mLayoutManager);
         devListView.setAdapter(deviceSettingAdapter);
+    }
+
+    public LatteDelegate getDELEGATE() {
+        return DELEGATE;
+    }
+
+    public void setDELEGATE(LatteDelegate DELEGATE) {
+        this.DELEGATE = DELEGATE;
     }
 }

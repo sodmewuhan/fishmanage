@@ -24,8 +24,9 @@ public class DeviceSettingAdapter extends RecyclerView.Adapter<DeviceSettingAdap
 
     private LatteDelegate DELEGATE;
 
-    public DeviceSettingAdapter(List<BoxInfo> boxInfos) {
+    public DeviceSettingAdapter(List<BoxInfo> boxInfos,LatteDelegate delegate) {
         this.boxInfos = boxInfos;
+        this.DELEGATE = delegate;
     }
 
     @NonNull
@@ -62,5 +63,21 @@ public class DeviceSettingAdapter extends RecyclerView.Adapter<DeviceSettingAdap
         public void onClick(View view) {
 
         }
+    }
+
+    public LatteDelegate getDELEGATE() {
+        return DELEGATE;
+    }
+
+    public void setDELEGATE(LatteDelegate DELEGATE) {
+        this.DELEGATE = DELEGATE;
+    }
+
+    public List<BoxInfo> getBoxInfos() {
+        return boxInfos;
+    }
+
+    public void setBoxInfos(List<BoxInfo> boxInfos) {
+        this.boxInfos = boxInfos;
     }
 }

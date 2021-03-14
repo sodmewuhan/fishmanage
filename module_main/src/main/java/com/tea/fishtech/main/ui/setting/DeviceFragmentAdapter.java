@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.common.utils.log.LatteLogger;
+import com.tea.fishtech.ui.delegates.LatteDelegate;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -24,11 +25,15 @@ public class DeviceFragmentAdapter extends FragmentPagerAdapter {
 
     private List<BoxInfo> waterList = Lists.newArrayList();
 
+    private LatteDelegate DELEGATE;
+
     public DeviceFragmentAdapter(@NonNull FragmentManager fm, int behavior,
                                  List<String> mDataList,
-                                 List<BoxInfo> boxInfos) {
+                                 List<BoxInfo> boxInfos,
+                                 LatteDelegate delegate) {
         super(fm, behavior);
         this.mDataList = mDataList;
+        this.DELEGATE = delegate;
 
         if (CollectionUtils.isNotEmpty(boxInfos)) {
             for(BoxInfo obj : boxInfos) {
@@ -49,11 +54,13 @@ public class DeviceFragmentAdapter extends FragmentPagerAdapter {
             case 0:
                 WaterFragment waterFragment = new WaterFragment();
                 waterFragment.setBoxInfoList(waterList);
+                waterFragment.setDELEGATE(DELEGATE);
                 fragment = waterFragment;
                 break;
             case 1:
                 DevFragment devFragment = new DevFragment();
                 devFragment.setBoxInfoList(devList);
+                devFragment.setDELEGATE(DELEGATE);
                 fragment = devFragment;
                 break;
         }

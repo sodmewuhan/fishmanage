@@ -16,6 +16,7 @@ import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.main.R;
 import com.tea.fishtech.main.ui.adapter.DeviceSettingAdapter;
 import com.tea.fishtech.main.ui.adapter.WaterSettingAdapter;
+import com.tea.fishtech.ui.delegates.LatteDelegate;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public class WaterFragment extends Fragment {
     private WaterSettingAdapter waterSettingAdapter;
 
     private LinearLayoutManager mLayoutManager;
+
+    private LatteDelegate DELEGATE;
 
     @Nullable
     @Override
@@ -48,9 +51,17 @@ public class WaterFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        waterSettingAdapter = new WaterSettingAdapter(this.boxInfoList);
+        waterSettingAdapter = new WaterSettingAdapter(this.boxInfoList,DELEGATE);
         mLayoutManager = new LinearLayoutManager(getContext());
         waterListView.setLayoutManager(mLayoutManager);
         waterListView.setAdapter(waterSettingAdapter);
+    }
+
+    public LatteDelegate getDELEGATE() {
+        return DELEGATE;
+    }
+
+    public void setDELEGATE(LatteDelegate DELEGATE) {
+        this.DELEGATE = DELEGATE;
     }
 }

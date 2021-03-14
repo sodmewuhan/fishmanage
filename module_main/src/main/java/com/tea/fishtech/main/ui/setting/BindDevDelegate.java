@@ -104,7 +104,8 @@ public class BindDevDelegate extends LatteDelegate {
     private void initControl() {
         // 绑定adapter
         deviceFragmentAdapter = new DeviceFragmentAdapter(getChildFragmentManager(),
-                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,titleList,boxInfos);
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,titleList,boxInfos,
+                this);
         viewPager.setAdapter(deviceFragmentAdapter);
         // 设置指示器
         magicIndicator.setBackgroundColor(Color.WHITE);
