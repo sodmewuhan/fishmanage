@@ -27,8 +27,6 @@
         android:layout_height="@dimen/common_navigator_height"
         android:layout_marginTop="@dimen/navigator_margin_top" />
 
-
-
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
@@ -36,9 +34,4 @@
             android:layout_height="wrap_content"
             android:fillViewport="true"
             android:layout_weight="1" />
-
-
-
-
-
 </LinearLayout>

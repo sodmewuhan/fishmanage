@@ -19,6 +19,7 @@ import com.tea.fishtech.ui.delegates.LatteDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class DevicePageAdapter extends PagerAdapter {
 
     private LatteDelegate delegate;

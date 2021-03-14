@@ -84,7 +84,6 @@ dependencies {
     implementation "com.github.skydoves:powermenu:2.1.9"
     // tab页面
     implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
-    implementation 'com.longsh:PagerSlidingTabStrip:1.0.0'
     // 进度条
     implementation 'com.liulishuo.magicprogresswidget:library:1.1.1'
     // 对话框

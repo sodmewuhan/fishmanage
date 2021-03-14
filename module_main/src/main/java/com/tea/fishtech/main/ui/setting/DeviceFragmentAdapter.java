@@ -6,7 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.google.common.collect.Lists;
+import com.tea.fishtech.common.constants.Constants;
+import com.tea.fishtech.common.model.BoxInfo;
 import com.tea.fishtech.common.utils.log.LatteLogger;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +20,25 @@ public class DeviceFragmentAdapter extends FragmentPagerAdapter {
 
     private List<String> mDataList = new ArrayList<>();
 
-    public DeviceFragmentAdapter(@NonNull FragmentManager fm, int behavior,List<String> mDataList) {
-        super(fm, behavior);
+    private List<BoxInfo> devList = Lists.newArrayList();
 
+    private List<BoxInfo> waterList = Lists.newArrayList();
+
+    public DeviceFragmentAdapter(@NonNull FragmentManager fm, int behavior,
+                                 List<String> mDataList,
+                                 List<BoxInfo> boxInfos) {
+        super(fm, behavior);
         this.mDataList = mDataList;
+
+        if (CollectionUtils.isNotEmpty(boxInfos)) {
+            for(BoxInfo obj : boxInfos) {
+                if (Constants.DEV_TYPE_NAME_CONTROL.equals(obj.getBoxTypeId())) {
+                    devList.add(obj);
+                } else if (Constants.BOX_TYPE_WATER.equals(obj.getBoxTypeId())) {
+                    waterList.add(obj);
+                }
+            }
+        }
     }
 
     @NonNull
@@ -28,10 +48,12 @@ public class DeviceFragmentAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 WaterFragment waterFragment = new WaterFragment();
+                waterFragment.setBoxInfoList(waterList);
                 fragment = waterFragment;
                 break;
             case 1:
                 DevFragment devFragment = new DevFragment();
+                devFragment.setBoxInfoList(devList);
                 fragment = devFragment;
                 break;
         }
