@@ -1,12 +1,15 @@
 package com.tea.fishtech.main.ui.adapter;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tea.fishtech.common.model.BoxInfo;
+import com.tea.fishtech.main.R;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -23,12 +26,14 @@ public class WaterSettingAdapter extends RecyclerView.Adapter<WaterSettingAdapte
     @NonNull
     @Override
     public WaterSettingAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_water_setting, parent, false);
+        return new WaterSettingAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull WaterSettingAdapter.ViewHolder holder, int position) {
-
+        holder.waterIdTv.setText(boxInfos.get(position).getBoxNumber());
     }
 
     @Override
@@ -38,8 +43,12 @@ public class WaterSettingAdapter extends RecyclerView.Adapter<WaterSettingAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        // 塘口名称
+        public TextView waterIdTv;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            waterIdTv = itemView.findViewById(R.id.water_id);
         }
 
         @Override
