@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingLeft="11dp"
-    android:paddingRight="11dp"
+    android:paddingRight="5dp"
     android:paddingBottom="8dp"
     android:background="@drawable/list_view_item_click">
 
@@ -40,8 +40,20 @@
         android:textColor="@color/colorGray"
         app:layout_constraintLeft_toRightOf="@+id/tv_title"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintRight_toRightOf="parent"
         android:textSize="14sp" />
 
+    <TextView
+        android:id="@+id/graph"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/royalblue"
+        android:text="图表"
+        app:layout_constraintLeft_toRightOf="@+id/devNo"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="14sp" />
 
     <!-- 溶解氧  -->
     <TextView

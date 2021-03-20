@@ -22,6 +22,8 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.hjq.bar.OnTitleBarListener;
+import com.hjq.bar.TitleBar;
 import com.tea.fishtech.common.constants.Constants;
 import com.tea.fishtech.common.constants.ServerURL;
 import com.tea.fishtech.common.constants.TestConstants;
@@ -72,8 +74,8 @@ public class ChartDelegate extends LatteDelegate implements View.OnClickListener
     // 选择的日期
     private DateTime selectDate;
 
-    @BindView(R2.id.title_back)
-    ImageView mTitleBarIvBack;
+    @BindView(R2.id.dev_titlebar)
+    TitleBar titleBar;
 
     // 今天
     @BindView(R2.id.topic_item_today)
@@ -117,9 +119,30 @@ public class ChartDelegate extends LatteDelegate implements View.OnClickListener
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         LatteLogger.d("enter the ChartDelegate");
-        mTitleBarIvBack.setOnClickListener(this);
-
+//        mTitleBarIvBack.setOnClickListener(this);
+        initListener();
         initCalendarBtn();
+    }
+
+    private void initListener() {
+        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
+
+            @Override
+            public void onLeftClick(View v) {
+                finish();
+            }
+
+            @Override
+            public void onTitleClick(View v) {
+
+            }
+
+            @Override
+            public void onRightClick(View v) {
+                // TODO 添加
+            }
+        });
+
     }
 
     @Override
@@ -129,9 +152,9 @@ public class ChartDelegate extends LatteDelegate implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.title_back) {
-            finish();
-        }
+//        if (view.getId() == R.id.title_back) {
+//            finish();
+//        }
     }
 
 

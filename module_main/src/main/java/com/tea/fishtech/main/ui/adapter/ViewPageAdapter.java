@@ -109,7 +109,7 @@ public class ViewPageAdapter extends PagerAdapter {
         listView = mView.findViewById(R.id.collect_waterlistView);
         mErrorLayout = mView.findViewById(R.id.collect_water_error_layout);
 
-        WaterAdapter waterAdapter = new WaterAdapter(container.getContext(),waterBox,boxAndWaterStatusDTOList);
+        WaterAdapter waterAdapter = new WaterAdapter(container.getContext(),waterBox,boxAndWaterStatusDTOList,DELEGATE);
         if (waterBox != null && waterBox.size() > 0) {
             listView.setAdapter(waterAdapter);
             waterAdapter.notifyDataSetChanged();
