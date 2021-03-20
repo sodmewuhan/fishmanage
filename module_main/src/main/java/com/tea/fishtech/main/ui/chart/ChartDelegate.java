@@ -35,6 +35,7 @@ import com.tea.fishtech.main.R;
 import com.tea.fishtech.main.R2;
 import com.tea.fishtech.ui.delegates.LatteDelegate;
 
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeFieldType;
 import org.joda.time.format.DateTimeFormat;
@@ -62,6 +63,8 @@ public class ChartDelegate extends LatteDelegate implements View.OnClickListener
     private static DateTimeFormatter SDF_PARAMETER = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
     private static final Integer LABEL_COUNT = 8;
+
+    private String devNo = StringUtils.EMPTY;
 
     // 溶氧量的ID
     private static final String OXYGEN_ID = "1";
@@ -119,7 +122,7 @@ public class ChartDelegate extends LatteDelegate implements View.OnClickListener
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, @NonNull View rootView) {
         LatteLogger.d("enter the ChartDelegate");
-//        mTitleBarIvBack.setOnClickListener(this);
+        devNo = getArguments().getString("boxNumber");
         initListener();
         initCalendarBtn();
     }
@@ -195,7 +198,8 @@ public class ChartDelegate extends LatteDelegate implements View.OnClickListener
         }
 
         try {
-            getChartData(TestConstants.DETAULT_XOYGEN_ID);
+            LatteLogger.d("dev no is " + devNo);
+            getChartData(devNo);
         } catch (Exception e) {
             LatteLogger.e(TAG,e.getMessage());
         }
@@ -247,7 +251,7 @@ public class ChartDelegate extends LatteDelegate implements View.OnClickListener
         }
 
         try {
-            getChartData(TestConstants.DETAULT_XOYGEN_ID);
+            getChartData(devNo);
         } catch (Exception e) {
             LatteLogger.e(TAG,e.getMessage());
         }

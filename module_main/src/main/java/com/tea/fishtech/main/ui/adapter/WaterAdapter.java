@@ -1,6 +1,7 @@
 package com.tea.fishtech.main.ui.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -94,8 +95,12 @@ public class WaterAdapter extends CommonAdapter<BoxInfo> implements View.OnClick
         praphTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LatteLogger.d("图标");
+                String devNo = devNoTv.getText().toString();
+                LatteLogger.d("dev no is " + devNo);
                 ChartDelegate chartDelegate = new ChartDelegate();
+                Bundle bundle = new Bundle();
+                bundle.putString("boxNumber",devNo);
+                chartDelegate.setArguments(bundle);
                 DELEGATE.getSupportDelegate().start(chartDelegate);
             }
         });

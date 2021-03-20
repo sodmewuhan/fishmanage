@@ -6,5 +6,5 @@ public class TestConstants {
 
     public static final String DEFAULT_USER = "18627876816";
 
-    public static final String DETAULT_XOYGEN_ID = "89860436101980049113";
+//    public static final String DETAULT_XOYGEN_ID = "89860436101980049113";
 }
