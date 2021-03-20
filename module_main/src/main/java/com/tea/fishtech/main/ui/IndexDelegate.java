@@ -52,8 +52,6 @@ public class IndexDelegate extends BottomItemDelegate {
     @BindView(R2.id.view_pager)
     ScrollViewPage viewPager;
 
-//    private List<String> titles = new ArrayList<>();
-
     private ViewPageAdapter titleAdapter;
 
     private CommonNavigator mCommonNavigator;
@@ -168,9 +166,6 @@ public class IndexDelegate extends BottomItemDelegate {
 
             @Override
             public IPagerIndicator getIndicator(Context context) {
-//                WrapPagerIndicator indicator = new WrapPagerIndicator(context);
-//                indicator.setFillColor(Color.parseColor("#ebe4e3"));
-//                return indicator;
                 return null;
             }
         });
