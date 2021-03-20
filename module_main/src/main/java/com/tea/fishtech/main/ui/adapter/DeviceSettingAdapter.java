@@ -18,6 +18,9 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
+import cn.addapp.pickers.picker.TimePicker;
+import es.dmoral.toasty.Toasty;
+
 public class DeviceSettingAdapter extends RecyclerView.Adapter<DeviceSettingAdapter.ViewHolder> {
 
     private List<BoxInfo> boxInfos = Lists.newArrayList();
@@ -53,10 +56,32 @@ public class DeviceSettingAdapter extends RecyclerView.Adapter<DeviceSettingAdap
         // 塘口名称
         public TextView devIdTv;
 
+        // 设置开启
+        public TextView tvOpenSetting;
+
+        // 设置关闭
+        public TextView tvCloseSetting;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             devIdTv = itemView.findViewById(R.id.dev_id);
+            tvOpenSetting = itemView.findViewById(R.id.tv_open_setting);
+            tvCloseSetting = itemView.findViewById(R.id.tv_close_setting);
+            tvOpenSetting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LatteLogger.d("设置打开阈值");
+                    onTimePicker(itemView);
+                }
+            });
+
+            tvCloseSetting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LatteLogger.d("设置关闭阈值");
+                    onTimePicker(itemView);
+                }
+            });
         }
 
         @Override
@@ -79,5 +104,20 @@ public class DeviceSettingAdapter extends RecyclerView.Adapter<DeviceSettingAdap
 
     public void setBoxInfos(List<BoxInfo> boxInfos) {
         this.boxInfos = boxInfos;
+    }
+
+    public void onTimePicker(View view) {
+        TimePicker picker = new TimePicker(DELEGATE.getActivity(), TimePicker.HOUR_24);
+        picker.setRangeStart(9, 0);//09:00
+        picker.setRangeEnd(18, 0);//18:30
+        picker.setTopLineVisible(false);
+        picker.setLineVisible(false);
+        picker.setOnTimePickListener(new TimePicker.OnTimePickListener() {
+            @Override
+            public void onTimePicked(String hour, String minute) {
+                Toasty.normal(DELEGATE.getContext(),hour + ":" + minute).show();
+            }
+        });
+        picker.show();
     }
 }

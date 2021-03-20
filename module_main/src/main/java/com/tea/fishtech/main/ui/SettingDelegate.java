@@ -57,12 +57,6 @@ public class SettingDelegate extends BottomItemDelegate  {
 
     private static final String TAG = SettingDelegate.class.getName();
 
-    /**
-     * 增加按钮
-     */
-//    @BindView(R2.id.flaot_btn)
-//    FloatingActionButton fab;
-
     @BindView(R2.id.dev_titlebar)
     TitleBar titleBar;
 

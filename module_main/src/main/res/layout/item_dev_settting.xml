@@ -1,17 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     android:layout_marginTop="10dp"
-    android:clickable="true"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:clickable="true"
+    android:padding="10dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="68dp"
+        android:layout_height="68dp"
+        android:scaleType="centerCrop"
+        android:src="@color/colorDefault"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="@dimen/itemRadus" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="设备编号"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintLeft_toRightOf="@+id/iv_cover"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/dev_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/colorGray"
+        app:layout_constraintLeft_toRightOf="@+id/tv_title"/>
+
+    <!-- 开机时间  -->
+    <TextView
+        android:id="@+id/tv_open_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="开机时间"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        app:layout_constraintLeft_toRightOf="@+id/iv_cover"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="开机时间"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/dev_id"
+        app:layout_constraintLeft_toRightOf="@+id/tv_open_title"
+        android:textSize="14sp" />
 
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_open_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="设置时间"
+        android:textColor="@color/skyblue"
+        app:layout_constraintTop_toBottomOf="@+id/dev_id"
+        app:layout_constraintLeft_toRightOf="@+id/tv_open"
+        android:textSize="14sp" />
+
+    <!-- 关机时间-->
+    <TextView
+        android:id="@+id/tv_close_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="关机时间"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/tv_open_title"
+        app:layout_constraintLeft_toRightOf="@+id/iv_cover"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="关机时间"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/tv_open"
+        app:layout_constraintLeft_toRightOf="@+id/tv_close_title"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_close_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="设置关机"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/tv_open_setting"
+        app:layout_constraintLeft_toRightOf="@+id/tv_close"
+        android:textSize="14sp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

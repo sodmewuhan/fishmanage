@@ -111,7 +111,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="设置阈值"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/skyblue"
         app:layout_constraintTop_toBottomOf="@+id/tv_open_setting"
         app:layout_constraintLeft_toRightOf="@+id/tv_close"
         android:textSize="14sp" />
