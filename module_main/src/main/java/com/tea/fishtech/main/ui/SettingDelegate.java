@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.collect.Lists;
+import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.mylhyl.circledialog.BaseCircleDialog;
 import com.mylhyl.circledialog.CircleDialog;
@@ -83,10 +83,32 @@ public class SettingDelegate extends BottomItemDelegate  {
         try {
             // 初始化数据
             getFishPond();
+            // 初始化事件
+            initListener();
         } catch (Exception e) {
             Toasty.error(getContext(), "数据加载失败", Toast.LENGTH_SHORT, true).show();
         }
 
+    }
+
+    private void initListener() {
+        titleBar.setOnTitleBarListener(new OnTitleBarListener() {
+            @Override
+            public void onLeftClick(View v) {
+
+            }
+
+            @Override
+            public void onTitleClick(View v) {
+
+            }
+
+            @Override
+            public void onRightClick(View v) {
+                LatteLogger.d("添加塘口信息");
+                addPond();
+            }
+        });
     }
 
     /**

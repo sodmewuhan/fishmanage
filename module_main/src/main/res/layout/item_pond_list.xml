@@ -68,4 +68,28 @@
         app:layout_constraintRight_toRightOf="parent"
         android:textSize="14sp" />
 
+    <!-- 设置  -->
+    <TextView
+        android:id="@+id/tv_setting_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="设置"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toBottomOf="@+id/tv_open_title"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toBottomOf="@+id/tv_category_text"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="14sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

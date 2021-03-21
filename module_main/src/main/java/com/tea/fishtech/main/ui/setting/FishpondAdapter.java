@@ -3,6 +3,7 @@ package com.tea.fishtech.main.ui.setting;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.google.common.collect.Lists;
+import com.mylhyl.circledialog.CircleDialog;
+import com.mylhyl.circledialog.callback.ConfigDialog;
+import com.mylhyl.circledialog.params.DialogParams;
 import com.tea.fishtech.common.app.ConfigKeys;
 import com.tea.fishtech.common.app.Latte;
 import com.tea.fishtech.common.constants.ServerURL;
@@ -50,6 +54,8 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
     public FishpondAdapter(List<FishPondDto> fishPondDtos, LatteDelegate delegate) {
         this.fishPondDtos = fishPondDtos;
         DELEGATE = delegate;
+
+        typeface = Typeface.createFromAsset(DELEGATE.getProxyActivity().getAssets(),"iconfont.ttf");
     }
 
     @Override
@@ -62,10 +68,6 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.pondNameTV.setText(fishPondDtos.get(position).getFishPond().getPondName());
-
-//        holder.categoryTv.setText(fishPondDtos.get(position).getFishPond().getCategory());
-//
-//        holder.manageModeTv.setText(fishPondDtos.get(position).getFishPond().getManageModeDesc());
     }
 
     @Override
@@ -79,18 +81,14 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
 
         // 塘口名称
         public TextView pondNameTV;
-
+        // 删除
         public TextView deleteTv;
 
         // 养殖品种
         private TextView categoryTv;
 
-        // 管理模式
-        TextView manageModeTv;
-
-        public Button modifyBtn;
-
-        public Button bindDevBtn;
+        // 设置
+        private TextView settingTv;
 
         public ViewHolder(View itemView, Context context) {
             super(itemView);
@@ -100,71 +98,55 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
             pondNameTV = itemView.findViewById(R.id.tv_pondname_text);
 
             deleteTv = itemView.findViewById(R.id.tv_delete);
-
-            typeface = Typeface.createFromAsset(DELEGATE.getProxyActivity().getAssets(),"iconfont.ttf");
             deleteTv.setTypeface(typeface);
-            deleteTv.setText("\ue601");
+            deleteTv.setText(R.string.remove);
 
             categoryTv = itemView.findViewById(R.id.tv_category_text);
-//
-//            manageModeTv = itemView.findViewById(R.id.tv_manageMode_tv);
-//
-//            modifyBtn = itemView.findViewById(R.id.modify_btn);
-//
-//            bindDevBtn = itemView.findViewById(R.id.bind_dev_btn);
 
-            // 注册点击事件
-//            itemView.setOnClickListener(this);
-//            modifyBtn.setOnClickListener(this);
-//            bindDevBtn.setOnClickListener(this);
+            settingTv = itemView.findViewById(R.id.tv_setting);
+            settingTv.setTypeface(typeface);
+            settingTv.setText(R.string.setting);
+
+             //注册点击事件
+            itemView.setOnClickListener(this);
+            deleteTv.setOnClickListener(this);
+            settingTv.setOnClickListener(this);
         }
         @Override
         public void onClick(View view) {
-//            int position = getAdapterPosition();
-//            Long pondId = fishPondDtos.get(position).getFishPond().getId();
-//            if (view.getId()== R.id.modify_btn) {
-//                LatteLogger.d(TAG,"修改管理模式,"+pondId);
-//                showModfiyMode(position,this.context);
-//            } else if (view.getId() == R.id.bind_dev_btn) {
-//                LatteLogger.d(TAG,"绑定设备"+pondId);
-//                BindDevDelegate bindDevDelegate = new BindDevDelegate();
-//                // 传递参数
-//                Bundle bundle = new Bundle();
-//                bundle.putLong("pondId",pondId);
-//                bindDevDelegate.setArguments(bundle);
-//                DELEGATE.getParentDelegate().getSupportDelegate().start(bindDevDelegate);
-//            }
+            int position = getAdapterPosition();
+            Long pondId = fishPondDtos.get(position).getFishPond().getId();
+            if (view.getId()== R.id.tv_delete) {
+                LatteLogger.d(TAG,"删除塘口信息,"+pondId);
+                deletePond();
+            } else if (view.getId() == R.id.tv_setting) {
+                LatteLogger.d(TAG,"绑定设备"+pondId);
+                BindDevDelegate bindDevDelegate = new BindDevDelegate();
+                // 传递参数
+                Bundle bundle = new Bundle();
+                bundle.putLong("pondId",pondId);
+                bindDevDelegate.setArguments(bundle);
+                DELEGATE.getParentDelegate().getSupportDelegate().start(bindDevDelegate);
+            }
         }
 
-        // 修改管理模式
-        private void showModfiyMode(int position, Context context) {
-
-            FishPond fishPond = fishPondDtos.get(position).getFishPond();
-            //1：手动  2 ：自动  3  定时
-            List<String> categoryMode = Lists.newArrayList();
-            categoryMode.add("手动");
-            categoryMode.add("自动");
-            categoryMode.add("定时");
-
-//            OptionsPickerView pvOptions = new OptionsPickerBuilder(context, new OnOptionsSelectListener() {
-//                @Override
-//                public void onOptionsSelect(int options1, int options2, int options3, View v) {
-//                    LatteLogger.d("确定位置" + options1);
-//                    // 修改管理方式
-//                    fishPond.setManageMode(String.valueOf(options1+1));
-//                    updatePondRest(fishPond);
-//
-//                    // 刷新当前item View
-//                    notifyItemChanged(position);
-//                }
-//            })
-//            .setCancelText("取消")//取消按钮文字
-//            .setSubmitText("确定")//确认按钮文字
-//            .build();
-//
-//            pvOptions.setPicker(categoryMode);
-//
-//            pvOptions.show();
+        private void deletePond() {
+            new CircleDialog.Builder()
+                    .setMaxHeight(0.8f)
+                    .setCanceledOnTouchOutside(false)
+                    .setCancelable(false)
+                    .setTitle("确定")
+                    .setText("您确定要删除该塘口信息吗？")
+                    .setNegative("取消", null)
+                    .setPositive("确定", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            LatteLogger.d("确定删除");
+                            // TODO 删除
+                        }
+                    })
+                    .show(DELEGATE.getFragmentManager())
+                    ;
         }
 
         // RPC调用管理模式改变
