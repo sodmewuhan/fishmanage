@@ -3,6 +3,7 @@ package com.tea.fishtech.main.ui.setting;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.google.common.collect.Lists;
+import com.tea.fishtech.common.app.ConfigKeys;
+import com.tea.fishtech.common.app.Latte;
 import com.tea.fishtech.common.constants.ServerURL;
 import com.tea.fishtech.common.model.FishPond;
 import com.tea.fishtech.common.model.FishPondDto;
@@ -42,6 +45,8 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
 
     private LatteDelegate DELEGATE;
 
+    private Typeface typeface;
+
     public FishpondAdapter(List<FishPondDto> fishPondDtos, LatteDelegate delegate) {
         this.fishPondDtos = fishPondDtos;
         DELEGATE = delegate;
@@ -58,9 +63,9 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.pondNameTV.setText(fishPondDtos.get(position).getFishPond().getPondName());
 
-        holder.categoryTv.setText(fishPondDtos.get(position).getFishPond().getCategory());
-
-        holder.manageModeTv.setText(fishPondDtos.get(position).getFishPond().getManageModeDesc());
+//        holder.categoryTv.setText(fishPondDtos.get(position).getFishPond().getCategory());
+//
+//        holder.manageModeTv.setText(fishPondDtos.get(position).getFishPond().getManageModeDesc());
     }
 
     @Override
@@ -74,6 +79,8 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
 
         // 塘口名称
         public TextView pondNameTV;
+
+        public TextView deleteTv;
 
         // 养殖品种
         private TextView categoryTv;
@@ -92,35 +99,41 @@ public class FishpondAdapter extends RecyclerView.Adapter<FishpondAdapter.ViewHo
 
             pondNameTV = itemView.findViewById(R.id.tv_pondname_text);
 
+            deleteTv = itemView.findViewById(R.id.tv_delete);
+
+            typeface = Typeface.createFromAsset(DELEGATE.getProxyActivity().getAssets(),"iconfont.ttf");
+            deleteTv.setTypeface(typeface);
+            deleteTv.setText("\ue601");
+
             categoryTv = itemView.findViewById(R.id.tv_category_text);
-
-            manageModeTv = itemView.findViewById(R.id.tv_manageMode_tv);
-
-            modifyBtn = itemView.findViewById(R.id.modify_btn);
-
-            bindDevBtn = itemView.findViewById(R.id.bind_dev_btn);
+//
+//            manageModeTv = itemView.findViewById(R.id.tv_manageMode_tv);
+//
+//            modifyBtn = itemView.findViewById(R.id.modify_btn);
+//
+//            bindDevBtn = itemView.findViewById(R.id.bind_dev_btn);
 
             // 注册点击事件
-            itemView.setOnClickListener(this);
-            modifyBtn.setOnClickListener(this);
-            bindDevBtn.setOnClickListener(this);
+//            itemView.setOnClickListener(this);
+//            modifyBtn.setOnClickListener(this);
+//            bindDevBtn.setOnClickListener(this);
         }
         @Override
         public void onClick(View view) {
-            int position = getAdapterPosition();
-            Long pondId = fishPondDtos.get(position).getFishPond().getId();
-            if (view.getId()== R.id.modify_btn) {
-                LatteLogger.d(TAG,"修改管理模式,"+pondId);
-                showModfiyMode(position,this.context);
-            } else if (view.getId() == R.id.bind_dev_btn) {
-                LatteLogger.d(TAG,"绑定设备"+pondId);
-                BindDevDelegate bindDevDelegate = new BindDevDelegate();
-                // 传递参数
-                Bundle bundle = new Bundle();
-                bundle.putLong("pondId",pondId);
-                bindDevDelegate.setArguments(bundle);
-                DELEGATE.getParentDelegate().getSupportDelegate().start(bindDevDelegate);
-            }
+//            int position = getAdapterPosition();
+//            Long pondId = fishPondDtos.get(position).getFishPond().getId();
+//            if (view.getId()== R.id.modify_btn) {
+//                LatteLogger.d(TAG,"修改管理模式,"+pondId);
+//                showModfiyMode(position,this.context);
+//            } else if (view.getId() == R.id.bind_dev_btn) {
+//                LatteLogger.d(TAG,"绑定设备"+pondId);
+//                BindDevDelegate bindDevDelegate = new BindDevDelegate();
+//                // 传递参数
+//                Bundle bundle = new Bundle();
+//                bundle.putLong("pondId",pondId);
+//                bindDevDelegate.setArguments(bundle);
+//                DELEGATE.getParentDelegate().getSupportDelegate().start(bindDevDelegate);
+//            }
         }
 
         // 修改管理模式

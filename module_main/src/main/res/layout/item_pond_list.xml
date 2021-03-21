@@ -1,102 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    android:layout_marginTop="10dp"
-    android:clickable="true"
-    android:background="@color/white"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="11dp"
+    android:paddingRight="10dp"
+    android:layout_marginTop="5dp"
+    android:paddingBottom="8dp"
+    android:background="@drawable/list_view_item_click">
 
-    <RelativeLayout
+    <!-- 塘口名称  -->
+    <TextView
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
-        android:layout_height="140dp"
-        android:layout_gravity="fill_vertical">
-        <!-- 塘口名称 -->
-        <TextView
-            android:id="@+id/title_pond"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="塘口名称"
-            android:textColor="@color/app_yellow"
-            android:textSize="14sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="塘口名称"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/tv_pondname_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textSize="14sp"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/detail_merchant_info_color" />
+    <TextView
+        android:id="@+id/tv_pondname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toRightOf="@+id/tv_title"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="14sp" />
 
-        <!-- 地址 -->
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="塘口删除"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="14sp" />
 
-        <!-- 养殖品种 -->
-        <TextView
-            android:id="@+id/title_fish_categroy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/title_pond"
-            android:text="养殖品种"
-            android:textColor="@color/app_yellow"
-            android:textSize="14sp" />
+    <!-- 养殖品种 -->
+    <TextView
+        android:id="@+id/tv_open_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="养殖品种"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/tv_category_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textSize="14sp"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/tv_pondname_text"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/detail_merchant_info_color" />
+    <TextView
+        android:id="@+id/tv_category_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintTop_toBottomOf="@+id/tv_delete"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textSize="14sp" />
 
-        <!-- 管理模式 -->
-        <TextView
-            android:id="@+id/title_manageMode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/title_fish_categroy"
-            android:text="管理模式"
-            android:textColor="@color/app_yellow"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tv_manageMode_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textSize="14sp"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/tv_category_text"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/detail_merchant_info_color" />
-
-        <!-- 修改管理模式 -->
-        <Button
-            android:id="@+id/modify_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@+id/title_manageMode"
-            android:layout_marginRight="10dp"
-            android:text="修改模式"/>
-
-        <Button
-            android:id="@+id/bind_dev_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/title_manageMode"
-            android:layout_marginRight="10dp"
-            android:text="管理设备"/>
-    </RelativeLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
